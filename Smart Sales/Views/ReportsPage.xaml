@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:charts="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:tabview="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+             xmlns:viewmodels="clr-namespace:Smart_Sales.ViewModels"
+             xmlns:models="clr-namespace:Smart_Sales.Models"
+             x:Class="Smart_Sales.Views.ReportsPage"
+             x:DataType="viewmodels:ReportsViewModel"
+             Title="ReportsPage"
+             Shell.NavBarIsVisible="False"
+             Shell.BackgroundColor="#f5f6f8">
+    <ScrollView>
+        <VerticalStackLayout Spacing="30" BackgroundColor="#f5f6f8">
+            <Grid RowDefinitions="Auto,Auto" HorizontalOptions="Center">
+                <Label Text="REPORTS" FontAttributes="Bold" FontSize="18" TextColor="Black"/>
+                <Label Text="ANALYTICS AND SUMMARY OF COLLECTED DATA" FontSize="15" TextColor="Black" FontAttributes="Bold"  Grid.Row="1"/>
+            </Grid>
+            <tabview:SfTabView x:Name="tabView"  TabBarBackground="white" IndicatorPlacement="Bottom"   SelectedIndex="11"  IndicatorBackground="#0370DF"  ItemsSource="{Binding dates}" >
+                <tabview:SfTabView.HeaderItemTemplate >
+                    <DataTemplate x:DataType="models:InvoiceList">
+                        <Label TextColor="Black"  FontAttributes="Bold" FontSize="18"  Padding="5,10,10,10"  Text="{Binding IDate}">
+                            <Label.GestureRecognizers >
+                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:ReportsViewModel}},Path=SortallDataCommand}" CommandParameter="{Binding .}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </DataTemplate>
+                </tabview:SfTabView.HeaderItemTemplate>
+            </tabview:SfTabView>
+            
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto" Padding="15,15" RowSpacing="20">
+                
+                <Border Grid.Row="0"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 10,10,10,10"
+                    Background="white"
+                    Padding="10,10"
+                    HorizontalOptions="Center"
+                    BackgroundColor="White">
+
+                    <charts:SfCartesianChart HeightRequest="450"  VerticalOptions="Start" IsTransposed="True">
+                        <charts:SfCartesianChart.Title>
+                            <Label Text="NET INCOME" TextColor="Gray" FontAttributes="Bold"/>
+
+                        </charts:SfCartesianChart.Title>
+
+                        <charts:SfCartesianChart.Legend>
+                            <charts:ChartLegend/>
+                        </charts:SfCartesianChart.Legend>
+
+                        <charts:SfCartesianChart.XAxes >
+                            <charts:CategoryAxis ShowMajorGridLines="False">
+                                <charts:CategoryAxis.Title>
+                                    <charts:ChartAxisTitle Text="Months"/>
+                                </charts:CategoryAxis.Title>
+                            </charts:CategoryAxis>
+                        </charts:SfCartesianChart.XAxes>
+
+                        <charts:SfCartesianChart.YAxes >
+                            <charts:NumericalAxis ShowMajorGridLines="False">
+
+                            </charts:NumericalAxis>
+                        </charts:SfCartesianChart.YAxes>
+
+                        <!--Initialize the series for chart-->
+                        <charts:ColumnSeries Label="Amount in Tzs" 
+                        EnableTooltip="True"                    
+                        ItemsSource="{Binding NetIncome}"
+                        XBindingPath="Name"                   
+                        YBindingPath="Cost">
+                            <charts:ColumnSeries.DataLabelSettings>
+                                <charts:CartesianDataLabelSettings LabelPlacement="Inner"/>
+                            </charts:ColumnSeries.DataLabelSettings>
+                        </charts:ColumnSeries>
+                    </charts:SfCartesianChart>                    
+
+                </Border>
+
+                <Border Grid.Row="1"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 10,10,10,10"
+                    Background="white"
+                    Padding="10,10"
+                    HorizontalOptions="Center"
+                    BackgroundColor="White">
+
+                    <charts:SfCartesianChart HeightRequest="450" VerticalOptions="Start" IsTransposed="True">
+                        <charts:SfCartesianChart.Title>
+                            <Label Text="EXPENSES" TextColor="Gray" FontAttributes="Bold"/>
+
+                        </charts:SfCartesianChart.Title>
+
+                        <charts:SfCartesianChart.Legend>
+                            <charts:ChartLegend/>
+                        </charts:SfCartesianChart.Legend>
+
+                        <charts:SfCartesianChart.XAxes >
+                            <charts:CategoryAxis ShowMajorGridLines="False">
+                                <charts:CategoryAxis.Title>
+                                    <charts:ChartAxisTitle Text="Months"/>
+                                </charts:CategoryAxis.Title>
+                            </charts:CategoryAxis>
+                        </charts:SfCartesianChart.XAxes>
+
+                        <charts:SfCartesianChart.YAxes >
+                            <charts:NumericalAxis ShowMajorGridLines="False">
+
+                            </charts:NumericalAxis>
+                        </charts:SfCartesianChart.YAxes>
+
+                        <!--Initialize the series for chart-->
+                        <charts:ColumnSeries Label="Amount in Tzs" 
+                            EnableTooltip="True"                    
+                            ItemsSource="{Binding Expense}"
+                            XBindingPath="Name"                   
+                            YBindingPath="Cost">
+                            <charts:ColumnSeries.DataLabelSettings>
+                                <charts:CartesianDataLabelSettings LabelPlacement="Inner"/>
+                            </charts:ColumnSeries.DataLabelSettings>
+                        </charts:ColumnSeries>
+                    </charts:SfCartesianChart>
+                </Border>
+
+                <Border Grid.Row="2"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        Background="white"
+                        Padding="10,10"
+                        HorizontalOptions="Center"
+                        BackgroundColor="White">
+
+                    <charts:SfCartesianChart HeightRequest="450"  VerticalOptions="Start" IsTransposed="True">
+                        <charts:SfCartesianChart.Title>
+                            <Label Text="INCOME" TextColor="Gray" FontAttributes="Bold"/>
+
+                        </charts:SfCartesianChart.Title>
+
+                        <charts:SfCartesianChart.Legend>
+                            <charts:ChartLegend/>
+                        </charts:SfCartesianChart.Legend>
+
+                        <charts:SfCartesianChart.XAxes >
+                            <charts:CategoryAxis ShowMajorGridLines="False">
+                                <charts:CategoryAxis.Title>
+                                    <charts:ChartAxisTitle Text="Months"/>
+                                </charts:CategoryAxis.Title>
+                            </charts:CategoryAxis>
+                        </charts:SfCartesianChart.XAxes>
+
+                        <charts:SfCartesianChart.YAxes >
+                            <charts:NumericalAxis ShowMajorGridLines="False">
+
+                            </charts:NumericalAxis>
+                        </charts:SfCartesianChart.YAxes>
+
+                        <!--Initialize the series for chart-->
+                        <charts:ColumnSeries Label="Amount in Tzs" 
+                            EnableTooltip="True"                    
+                            ItemsSource="{Binding Income}"
+                            XBindingPath="Name"                   
+                            YBindingPath="Cost"
+                            Width="0.7" >
+                            <charts:ColumnSeries.DataLabelSettings>
+                                <charts:CartesianDataLabelSettings LabelPlacement="Inner"/>
+                            </charts:ColumnSeries.DataLabelSettings>
+                        </charts:ColumnSeries>
+                    </charts:SfCartesianChart>
+                </Border>
+
+
+
+
+
+
+            </Grid>
+
+        </VerticalStackLayout>
+        
+    </ScrollView>
+</ContentPage>

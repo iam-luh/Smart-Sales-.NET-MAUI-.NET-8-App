@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:listview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Smart_Sales.Views.ProductsPage"
+             x:DataType="viewmodels:ProductsViewModel"
+             xmlns:viewmodels="clr-namespace:Smart_Sales.ViewModels"
+             xmlns:models="clr-namespace:Smart_Sales.Models"             
+             Title="ProductsPage"
+             Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout BackgroundColor="#f5f6f8" Spacing="20" Padding="15,20">
+        <Label Text="All Products and Services" FontSize="20" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center"/>
+        <Grid RowDefinitions="Auto"  HorizontalOptions="Center">
+            <Label Text="A LIST OF ALL THE PRODUCTS AND SERVICES" TextColor="Gray" FontAttributes="Bold" FontSize="15"/>
+        </Grid>
+
+        <Grid RowDefinitions="Auto">
+            <listview:SfListView HeightRequest="510" x:Name="listView" ItemsSource="{Binding Products}" ItemSize="170" >
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Product">
+                        <ViewCell>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem 
+                                           IconImageSource="delete.png"                                              
+                                           BackgroundColor="Red"
+                                           Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:ProductsViewModel}},Path=DeleteProductCommand}"                    
+                                           CommandParameter="{Binding .}" />
+                                       
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItem 
+                                           IconImageSource="edit.png"                                              
+                                           BackgroundColor="#0370DF"
+                                           Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:ProductsViewModel}},Path=GoToProductDetailsCommand}"                    
+                                           CommandParameter="{Binding .}" />
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
+                                <Frame BackgroundColor="White" BorderColor="White" HeightRequest="160" Padding="5,15">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:ProductsViewModel}},Path=GoToProductDisplayCommand}"                    
+                                         CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="5" >
+                                        <Label Text="{Binding Name}" TextColor="Black" FontSize="18" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" Text="{Binding JumlaPrice,StringFormat='Jumla Price: {0}TZS'}" TextColor="Black" FontSize="14" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" HorizontalOptions="End" Text="{Binding RetailPrice,StringFormat='Retail Price: {0}TZS'}" TextColor="Black" FontAttributes="Bold" FontSize="14"/>
+                                        <Line Grid.Row="2" BackgroundColor="Black"/>
+                                        <Grid Grid.Row="3" ColumnDefinitions="Auto,Auto" ColumnSpacing="10">
+                                            <Label Text="WholeSale Products Sold:" FontAttributes="Bold" TextColor="#0966F1" FontSize="14"/>
+                                            <Label Grid.Column="1" HorizontalOptions="Center" Text="{Binding JumlaSoldQty}" TextColor="#0966F1" FontSize="14"/>
+                                        </Grid>
+
+
+                                        <Grid Grid.Row="4" ColumnDefinitions="Auto,Auto" ColumnSpacing="10">
+                                            <Label Text="Retail Products Sold:" FontAttributes="Bold" TextColor="#0966F1" FontSize="14"/>
+                                            <Label Grid.Column="1" HorizontalOptions="Center" Text="{Binding RetailSoldQty}" FontSize="14" TextColor="#0966F1"/>
+                                        </Grid>
+
+                                        <Grid Grid.Row="5" ColumnDefinitions="Auto,Auto" ColumnSpacing="10">
+                                            <Label Text="Total Products Sold:" TextColor="#0966F1" FontAttributes="Bold" FontSize="14"/>
+                                            <Label Grid.Column="1" HorizontalOptions="Center" Text="{Binding TotalQuantity}" TextColor="#0966F1" FontSize="14"/>
+                                        </Grid>
+
+                                        
+                                    </Grid>
+                                </Frame>
+
+                            </SwipeView>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+                
+            </listview:SfListView>
+            
+            <Button  VerticalOptions="End" BackgroundColor="#0370DF" TextColor="White" Text="  + Add Product  " FontAttributes="Bold" FontSize="16" Padding="0" Command="{Binding GoToProductDtlsCommand}" HorizontalOptions="End"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:buttons="clr-namespace:Syncfusion.Maui.Buttons;assembly=Syncfusion.Maui.Buttons"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Smart_Sales.ViewModels"
+             xmlns:models="clr-namespace:Smart_Sales.Models"
+             x:Class="Smart_Sales.Views.AddInvoicePage"
+             x:DataType="viewmodels:AddInvoiceViewModel"
+             Title="AddInvoicePage"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <buttons:SfRadioGroup  x:Name="RadiobuttonGroup">
+            <Label Text="Pick one fruit from the group : "/>
+            <buttons:SfRadioButton Text="Orange"/>
+            <buttons:SfRadioButton Text="Apple"/>
+            <buttons:SfRadioButton Text="Grapes"/>
+        </buttons:SfRadioGroup>
+
+
+        <VerticalStackLayout BackgroundColor="#f5f6f8" Spacing="15" Padding="15,20">
+            <Label Text="Add or Update an Invoice" TextColor="Gray" HorizontalOptions="Center" FontSize="21" FontAttributes="Bold"/>
+            <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
+                <Label Text="Name of the Customer" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
+                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                    <Entry VerticalOptions="Center" x:Name="entryname"   Placeholder="Enter the Customer's Name" PlaceholderColor="Gray" TextColor="gray"  Text="{Binding Myinvoice.CustomerName, Mode=TwoWay}"/>
+                </Border>
+            </Grid>
+
+            <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
+                <Label Text="Choose the Product" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
+                <Border Grid.Row="1"   StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                    <Picker VerticalOptions="Center" Title="Select the Product or Service" TextColor="Gray" FontAttributes="Bold" x:Name="productpicker" 
+                         ItemsSource="{Binding Allproducts}" 
+                         BackgroundColor="White"                          
+                         SelectedIndexChanged="productpicker_SelectedIndexChanged"
+                         ItemDisplayBinding="{Binding Name}"
+                         SelectedItem="{Binding Myproduct,Mode=TwoWay}">
+                    </Picker>
+                </Border>
+            </Grid>
+
+            <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
+                <Label Text="Category of the Product" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
+                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="70"  Padding="5,0" >
+                    <Picker VerticalOptions="Center" Title="Select the Category of the Product" TextColor="Gray" x:Name="ctgpicker" 
+                        SelectedIndexChanged="ctgpicker_SelectedIndexChanged" 
+                        BackgroundColor="White" 
+                        FontAttributes="Bold"
+                        SelectedItem="{Binding Myinvoice.Category,Mode=TwoWay}">
+
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Jumla</x:String>
+                                <x:String>Retail</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </Border>
+            </Grid>
+
+
+            <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
+                <Label Text=" Price of the Product" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
+                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                    <Entry VerticalOptions="Center" x:Name="lblprdcost"  Placeholder="Price of the Product" PlaceholderColor="Gray" TextChanged="lblprdcost_TextChanged" FontAttributes="Bold" FontSize="15" TextColor="Black" Text="{Binding Myinvoice.ProductCost, Mode=TwoWay}"/>
+                </Border>
+            </Grid>
+
+            <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
+                <Label Text="Quantity of the Product" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
+                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                    <Entry VerticalOptions="Center" x:Name="entryQty" FontAttributes="Bold" TextChanged="entryQty_TextChanged" Keyboard="Numeric" Placeholder="Enter the Quantity of the Product" TextColor="Black" Text="{Binding Myinvoice.Quantity, Mode=TwoWay}"/>
+                </Border>
+            </Grid>
+
+            <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
+                <Label Text="Total Cost of the Invoice" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
+                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                    <Entry x:Name="lblttlcost" VerticalOptions="Center"  FontAttributes="Bold" FontSize="15" TextColor="Black" Text="{Binding Myinvoice.Cost, Mode=TwoWay}"/>
+                </Border>
+            </Grid>
+
+            <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="15" >
+                <Grid RowDefinitions="Auto,Auto" >
+                    <Label Text="Created Invoice Date" TextColor="Gray" FontAttributes="Bold" FontSize="16"/>
+                    <Border  StrokeThickness="0"
+                        StrokeShape="RoundRectangle 15,15,15,15"
+                        Background="white"
+                        HeightRequest="37"                
+                        Padding="0"
+                        Grid.Row="1">
+                        <DatePicker FontAttributes="Bold"  Date="{Binding Myinvoice.CreatedDate, Mode=TwoWay}" TextColor="Gray" />
+                    </Border>
+                </Grid>
+
+                <Grid RowDefinitions="Auto,Auto" Grid.Column="1"  >
+                    <Label Text="Created Invoice Time" TextColor="gray" FontAttributes="Bold" FontSize="16"/>
+                    <Border  StrokeThickness="0"
+                         StrokeShape="RoundRectangle 15,15,15,15"
+                         Background="white"
+                         HeightRequest="37"                
+                         Padding="0"
+                         Grid.Row="1">
+                        <TimePicker FontAttributes="Bold" TextColor="gray" Time="{Binding Myinvoice.CreatedTime, Mode=TwoWay}"/>
+                    </Border>
+                </Grid>
+
+            </Grid>
+
+            <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
+                <Label Text="Is the Invoice Paid or Not Paid: " TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
+                <buttons:SfRadioGroup Grid.Row="1"  x:Name="ExpensebtnGrp" CheckedChanged="ExpensebtnGrp_CheckedChanged_1">
+
+                    <buttons:SfRadioButton Text="Paid" x:Name="Paid"/>
+                    <buttons:SfRadioButton Text="Not Paid"   x:Name="NotPaid"/>
+
+                </buttons:SfRadioGroup>
+
+            </Grid>
+
+
+
+
+            <Button Text="Save" FontAttributes="Bold" BackgroundColor="#0370DF" TextColor="White" FontSize="16" Command="{Binding AddUpdateInvoiceCommand}"/>
+
+
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>

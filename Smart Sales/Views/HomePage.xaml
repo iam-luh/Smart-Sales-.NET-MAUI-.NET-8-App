@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:listview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:charts="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Smart_Sales.Views.HomePage"
+             x:DataType="viewmodels:HomeViewModel"
+             xmlns:viewmodels="clr-namespace:Smart_Sales.ViewModels"
+             xmlns:models="clr-namespace:Smart_Sales.Models"
+             Title="HomePage"
+             Shell.NavBarIsVisible="False"
+             Shell.BackgroundColor="#f5f6f8">
+    <ScrollView>
+        <VerticalStackLayout BackgroundColor="#f5f6f8" Padding="20,15" Spacing="20">
+
+            <Border 
+        StrokeThickness="0"
+        StrokeShape="RoundRectangle 10,10,10,10"
+        Background="white"
+        Padding="10,10"
+        HorizontalOptions="Center"
+        BackgroundColor="White">
+                <Grid ColumnDefinitions="Auto,Auto">
+                    
+                    <charts:SfCartesianChart Grid.ColumnSpan="2" VerticalOptions="Start">
+                        <charts:SfCartesianChart.Title>
+                            <Label Text="SALES STATISTICS" TextColor="Gray" FontAttributes="Bold"/>
+
+                        </charts:SfCartesianChart.Title>
+
+                        <charts:SfCartesianChart.Legend>
+                            <charts:ChartLegend/>
+                        </charts:SfCartesianChart.Legend>
+
+                        <charts:SfCartesianChart.XAxes >
+                            <charts:CategoryAxis ShowMajorGridLines="False">
+                                <charts:CategoryAxis.Title>
+                                    <charts:ChartAxisTitle Text="Days"/>
+                                </charts:CategoryAxis.Title>
+                            </charts:CategoryAxis>
+                        </charts:SfCartesianChart.XAxes>
+
+                        <charts:SfCartesianChart.YAxes >
+                            <charts:NumericalAxis ShowMajorGridLines="False">
+
+                            </charts:NumericalAxis>
+                        </charts:SfCartesianChart.YAxes>
+
+                        <!--Initialize the series for chart-->
+                        <charts:ColumnSeries Label="Amount in Tzs" 
+                    EnableTooltip="True"                    
+                    ItemsSource="{Binding Invoices}"
+                    Width="0.9"
+                    Spacing="0.1"
+                    XBindingPath="Name"                   
+                    YBindingPath="Cost">
+                            <charts:ColumnSeries.DataLabelSettings>
+                                <charts:CartesianDataLabelSettings LabelPlacement="Inner"/>
+                            </charts:ColumnSeries.DataLabelSettings>
+                        </charts:ColumnSeries>
+                    </charts:SfCartesianChart>
+                    <Border Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="End" VerticalOptions="Start"  StrokeThickness="1" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="40"  Padding="1,0" >
+                        <Picker VerticalOptions="Center" Title="Select a Week" TextColor="Gray" x:Name="weekpicker" 
+                            SelectedIndexChanged="weekpicker_SelectedIndexChanged" 
+                            BackgroundColor="White" 
+                            FontAttributes="Bold"
+                            >
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>This Week</x:String>
+                                    <x:String>Last Week</x:String>
+                                    <x:String>Last 2 Weeks</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Border>
+
+                </Grid>
+            </Border>
+
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <HorizontalStackLayout Spacing="15">
+                    <Border BackgroundColor="white" 
+                        StrokeThickness="0" 
+                        HeightRequest="120" 
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        WidthRequest="170">
+                        <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10">
+                            <Label Text="GROSS INCOME" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
+                            <Label Grid.Row="1" Text="{Binding Grossincome,StringFormat='{0:N0} TZS'}" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                            <HorizontalStackLayout Grid.Row="2" Margin="0,20,0,0">
+                                <Label Text="{Binding Pergrossincome, StringFormat='{0:F2}%'}" TextColor="{Binding Colorgrossincome}" FontAttributes="Bold"/>
+                                <Label Text=" than last week" FontAttributes="Bold" TextColor="Black" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <Border StrokeThickness="0"
+                        HeightRequest="120" 
+                        BackgroundColor="White"
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        WidthRequest="170">
+                        <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10" >
+                            <Label Text="TOTAL EXPENSES" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
+                            <Label Grid.Row="1" Text="{Binding Totalexpenses,StringFormat='{0:N0} TZS'}" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                            <HorizontalStackLayout Grid.Row="2" Margin="0,20,0,0">
+                                <Label Text="{Binding Pertotalexpenses, StringFormat='{0:F2}%'}" TextColor="{Binding Colortotalexpenses}" FontAttributes="Bold"/>
+                                <Label Text=" than last week" FontAttributes="Bold" TextColor="black"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <Border BackgroundColor="white" 
+                        StrokeThickness="0" 
+                        HeightRequest="120" 
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        WidthRequest="170">
+                        <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10">
+                            <Label Text="NET INCOME" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
+                            <Label Grid.Row="1" Text="{Binding Netincome,StringFormat='{0:N0} TZS'}" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                            <HorizontalStackLayout Grid.Row="2" Margin="0,20,0,0">
+                                <Label Text="{Binding Pernetincome,StringFormat='{0:F2}%'}" TextColor="{Binding Colornetincome}" FontAttributes="Bold"/>
+                                <Label Text=" than last week" FontAttributes="Bold" TextColor="Black" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                    
+                </HorizontalStackLayout>
+            </ScrollView>
+
+
+            <Border 
+              StrokeThickness="0"
+              StrokeShape="RoundRectangle 10,10,10,10"
+              Background="white"
+              Padding="10,10"
+              HeightRequest="190"
+              HorizontalOptions="Center"
+              BackgroundColor="White">
+                <Grid RowDefinitions="Auto,Auto">
+                    <Label Text="RECENT TRANSACTIONS" TextColor="Gray" FontSize="15" FontAttributes="Bold" />
+                    
+                    <ListView ItemsSource="{Binding Collector}" Grid.Row="1"  SeparatorVisibility="None">
+                        <ListView.ItemTemplate >
+                            <DataTemplate x:DataType="models:Invoice">
+                                <ViewCell>
+                                    <Grid RowDefinitions="Auto,Auto">
+                                        <Label Text="{Binding Name}" TextColor="Black" FontAttributes="Bold"/>
+                                        <Label HorizontalOptions="End" Text="{Binding Cost, StringFormat='{0:N0}'}" TextColor="Black" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" Text="{Binding LastUpdatedDate,StringFormat='{0: dd MMM yyyy}'}" TextColor="Black" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" HorizontalOptions="End" Text="Completed" TextColor="Green" IsVisible="{Binding IsPaid}" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" HorizontalOptions="End" Text="Pending" TextColor="#f2b862" FontAttributes="Bold" IsVisible="{Binding IsNotPaid}" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+
+
+            </Border>
+
+            
+
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+</ContentPage>

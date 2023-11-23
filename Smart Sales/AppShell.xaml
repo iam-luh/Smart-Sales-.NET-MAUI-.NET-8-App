@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Smart_Sales.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Smart_Sales"
+    xmlns:views="clr-namespace:Smart_Sales.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Smart_Sales">
+
+    
+    
+    <TabBar Shell.TabBarBackgroundColor="White"        
+        >
+
+        <Tab Title="Home" Icon="home.png"
+              Shell.TabBarTitleColor="#0370DF"
+             Shell.TabBarForegroundColor="#0370DF"
+              >
+            <ShellContent 
+                ContentTemplate="{DataTemplate views:HomePage}" />
+
+        </Tab>
+        
+        <Tab Title="Invoices" Icon="invoices.png"
+              Shell.TabBarTitleColor="#0370DF"
+              Shell.TabBarForegroundColor="#0370DF">
+            <ShellContent Title="Bidhaa"                            
+                          ContentTemplate="{DataTemplate views:InvoicesPage}"/>
+        </Tab>
+
+        <Tab  Title="Add Invoice" Icon="addblackbtn.png" 
+              Shell.TabBarTitleColor="#0370DF"
+              Shell.TabBarForegroundColor="#0370DF">
+            <ShellContent ContentTemplate="{DataTemplate views:AddInvoicePage}"                         
+                          />
+        </Tab>
+        
+        <Tab Title="Products" Icon="products.png"
+              Shell.TabBarTitleColor="#0370DF"
+              Shell.TabBarForegroundColor="#0370DF">
+            <ShellContent ContentTemplate="{DataTemplate views:ProductsPage}"
+                          />
+
+        </Tab>
+        
+        <Tab Title="Reports" Icon="report.png"
+             Shell.TabBarTitleColor="#0370DF"
+             Shell.TabBarForegroundColor="#0370DF">
+            <ShellContent ContentTemplate="{DataTemplate views:ReportsPage}"
+                          
+                          />
+        </Tab>
+    </TabBar>
+    
+    
+
+
+</Shell>

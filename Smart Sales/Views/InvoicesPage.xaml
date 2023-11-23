@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:listview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:tabview="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Smart_Sales.ViewModels"
+             xmlns:models="clr-namespace:Smart_Sales.Models"   
+             xmlns:data="clr-namespace:Syncfusion.Maui.DataSource;assembly=Syncfusion.Maui.DataSource" 
+             x:Class="Smart_Sales.Views.InvoicesPage"
+             x:DataType="viewmodels:InvoicesViewModel"
+             Title="InvoicesPage"
+             Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout BackgroundColor="#f5f6f8" Padding="0,20">
+        <tabview:SfTabView x:Name="tabView"  TabBarBackground="white" IndicatorPlacement="Bottom"   SelectedIndex="11"  IndicatorBackground="#0370DF"  ItemsSource="{Binding dates}" >
+            <tabview:SfTabView.HeaderItemTemplate >
+                <DataTemplate x:DataType="models:InvoiceList">
+                    <Label TextColor="Black"  FontAttributes="Bold" FontSize="16"  Padding="5,10,10,10"  Text="{Binding InvoiceDate, StringFormat='{0:MMM/yyy}'}">
+                        <Label.GestureRecognizers >
+                            <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:InvoicesViewModel}},Path=SortAllInvoicesCommand}" CommandParameter="{Binding .}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </DataTemplate>
+            </tabview:SfTabView.HeaderItemTemplate>
+        </tabview:SfTabView>
+
+        <Grid >
+            <listview:SfListView  x:Name="listView" ItemSize="75"  HeightRequest="550" SelectionMode="None" ItemsSource="{Binding ListInvoices}" >
+                <!--<listview:SfListView.DataSource >
+                    <data:DataSource LiveDataUpdateMode="AllowDataShaping">
+                        <data:DataSource.GroupDescriptors>
+                            <data:GroupDescriptor PropertyName="LastUpdatedDate"/>
+                        </data:DataSource.GroupDescriptors>
+                    </data:DataSource>
+                </listview:SfListView.DataSource>
+
+                <listview:SfListView.GroupHeaderTemplate>
+                    <DataTemplate x:Name="GHeaderTemplate" >
+                        <ViewCell>
+                            <Grid>
+                                <Label x:DataType="models:Invoice" Text="{Binding LastUpdatedDate, StringFormat='{0: dd MMM yyyy}'}" BackgroundColor="#f5f6f8" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
+                                <Label Text="{Binding }"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.GroupHeaderTemplate>-->
+
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate  >
+                        <ViewCell >
+                            <SwipeView x:DataType="models:Invoice" >
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem 
+                                       IconImageSource="delete.png"                                              
+                                       BackgroundColor="Red"
+                                       Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:InvoicesViewModel}},Path=DeleteInvoiceCommand}"                    
+                                       CommandParameter="{Binding .}" />
+
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItem 
+                                       IconImageSource="edit.png"                                              
+                                       BackgroundColor="#0370DF"
+                                       Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:InvoicesViewModel}},Path=GoToInvoiceDetailsCommand}"                    
+                                       CommandParameter="{Binding .}" />
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
+                                <Grid RowDefinitions="Auto,Auto,Auto"  x:DataType="models:Invoice" BackgroundColor="#f5f6f8" Padding="10,15">
+                                    <Label Text="{Binding Name}" TextColor="Black" FontAttributes="Bold"/>
+                                    <Label HorizontalOptions="End" Text="{Binding Cost}" TextColor="Black" FontAttributes="Bold"/>
+                                    <Label Grid.Row="2" Text="{Binding CustomerName,StringFormat='Paid By : {0}'}"  TextColor="Black" FontAttributes="Bold"/>
+                                    <Label Grid.Row="1" Text="{Binding LastUpdatedDate, StringFormat='{0:dd MMM yyyy}'}" TextColor="Black" FontAttributes="Bold"/>
+                                    <Label Grid.Row="1" HorizontalOptions="End" Text="Completed" TextColor="Green" IsVisible="{Binding IsPaid}" FontAttributes="Bold"/>
+                                    <Label Grid.Row="1" HorizontalOptions="End" Text="Pending" TextColor="#f2b862" FontAttributes="Bold" IsVisible="{Binding IsNotPaid}" />
+                                </Grid>
+                            </SwipeView>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>
+
+<!--Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodel:TaskListViewModel}},Path=DeleteTaskCommand}" CommandParameter="{Binding PopupTask}-->

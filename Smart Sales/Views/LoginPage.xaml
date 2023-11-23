@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Smart_Sales.Views.LoginPage"
+             Title="LoginPage"
+            >
+    <Grid BackgroundColor="#f5f6f8">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="10" ColumnDefinitions="Auto" BackgroundColor="#f5f6f8" VerticalOptions="Center" HorizontalOptions="Center">
+
+            <Image Source="smartsales.png"  HeightRequest="250" WidthRequest="250" Margin="0,-80,0,0" />
+
+            <Grid RowSpacing="10" RowDefinitions="Auto,Auto" Grid.Row="1">
+                <Label Text="Username" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
+                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                    <Entry VerticalOptions="Center" x:Name="entryname" FontAttributes="Bold"  Placeholder="Enter your Username" PlaceholderColor="Gray" TextColor="Black" />
+                </Border>
+            </Grid>
+
+            <Grid RowSpacing="10" RowDefinitions="Auto,Auto" Grid.Row="2">
+                <Label Text="License Number" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
+                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                    <Entry x:Name="entrykey" VerticalOptions="Center" Placeholder="Enter the License Number" PlaceholderColor="Gray"  FontAttributes="Bold" FontSize="15" TextColor="Black" />
+                </Border>
+            </Grid>
+
+            <Button Grid.Row="3" x:Name="btnlogin"  Text="Save" BackgroundColor="#0370DF" Clicked="btnlogin_Clicked" TextColor="white" FontAttributes="Bold" FontSize="14"/>
+
+        </Grid>
+
+        
+    </Grid>
+</ContentPage>
