@@ -17,7 +17,7 @@ namespace Smart_Sales.Services
 
         public async void SetUpDb()
         {
-            SetUpDb();
+            
             if (conn is null)
             {   string dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Products.db3");
                 conn = new SQLiteAsyncConnection(dbpath);

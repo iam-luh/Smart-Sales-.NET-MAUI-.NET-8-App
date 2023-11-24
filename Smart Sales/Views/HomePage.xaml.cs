@@ -18,6 +18,7 @@ public partial class HomePage : ContentPage
         weekpicker.SelectedIndex = 0;
         viewModel.FilterInvoicesForWeekCommand.Execute(DateTime.Now);
         viewModel.CalculateWeeklyCommand.Execute(null);
+        viewModel.GetMostRecentInvoices();
     }
 
     private void weekpicker_SelectedIndexChanged(object sender, EventArgs e)

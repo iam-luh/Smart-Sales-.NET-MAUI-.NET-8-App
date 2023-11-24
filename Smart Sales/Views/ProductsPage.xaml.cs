@@ -10,11 +10,12 @@ public partial class ProductsPage : ContentPage
 		InitializeComponent();
         viewModel = vm;
         BindingContext = vm;
-	}
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-		viewModel.GetAllProductsCommand.Execute(null);
     }
+
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+		viewModel.GetAllProductsCommand.Execute(null);
+	}
 }

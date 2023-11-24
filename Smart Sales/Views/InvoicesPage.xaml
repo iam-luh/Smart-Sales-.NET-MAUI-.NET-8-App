@@ -11,7 +11,14 @@
              Title="InvoicesPage"
              Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout BackgroundColor="#f5f6f8" Padding="0,20">
+    <VerticalStackLayout BackgroundColor="#f5f6f8" Padding="0,15" Spacing="10">
+
+        <Grid RowDefinitions="Auto,Auto" RowSpacing="3">
+            <Label Text="INVOICES" FontAttributes="Bold" FontSize="21" HorizontalOptions="Center" TextColor="Black"/>
+            <Label Text="A LIST OF ALL THE INVOICES " HorizontalOptions="Center" FontSize="15" TextColor="Black" FontAttributes="Bold"  Grid.Row="1"/>
+
+        </Grid>
+        
         <tabview:SfTabView x:Name="tabView"  TabBarBackground="white" IndicatorPlacement="Bottom"   SelectedIndex="11"  IndicatorBackground="#0370DF"  ItemsSource="{Binding dates}" >
             <tabview:SfTabView.HeaderItemTemplate >
                 <DataTemplate x:DataType="models:InvoiceList">

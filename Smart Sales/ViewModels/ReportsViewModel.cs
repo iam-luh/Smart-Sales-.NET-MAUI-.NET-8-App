@@ -24,6 +24,18 @@ namespace Smart_Sales.ViewModels
         public double myincome;
 
         [ObservableProperty]
+        public double mostsoldprdcost;
+
+        [ObservableProperty]
+        public double leastsoldprdcost;
+
+        [ObservableProperty]
+        public double mostsoldsrvcost;
+
+        [ObservableProperty]
+        public double leastsoldsrvcost;
+
+        [ObservableProperty]
         public string mostsoldprd;
 
         [ObservableProperty]
@@ -140,7 +152,7 @@ namespace Smart_Sales.ViewModels
             Myincome = Income.Sum(x => x.Cost);
             Myexpense = Expense.Sum(x => x.Cost);
             Mynetincome = NetIncome.Sum(x => x.Cost);
-
+            SortProductData(date);
         }
 
         [RelayCommand]
@@ -150,45 +162,55 @@ namespace Smart_Sales.ViewModels
 
             var groupedinvoices = invoices.GroupBy(x => x.Name);
 
-            double qty = 0;
-            int num = 1;
+            Mostsoldprd= string.Empty; Mostsoldsrvc = string.Empty; Leastsoldprd = string.Empty; Leastsoldsrvc = string.Empty;
+
+            Mostsoldprdcost = 0; Mostsoldsrvcost = 0; Leastsoldsrvcost = 0; Leastsoldprdcost = 0;
+            double mspqty = 0; double lspqty = 0; double lssrv = 0; double mssrv = 0;
+
+            int num1 = 1, num2 = 1 , num3 = 1 , num4 = 1;
             //This loop passes through all the products 
             foreach (var group in groupedinvoices)
             {              
-                double sum = group.Sum(x => x.Quantity);
+                double sum = group.Sum(x => x.Cost);                
 
                 //This finds the most sold product
-               if((sum > qty || num is 1)&& !group.FirstOrDefault().IsExpense)
+               if((sum > mspqty || num1 is 1)&& !group.FirstOrDefault().IsExpense)
                {
-                    qty = sum;
+                    mspqty = sum;
                     Mostsoldprd = group.Key;
+                    Mostsoldprdcost = sum;
+                    ++num1;
                }
 
                //This finds the least sold product
-                if ((sum < qty || num is 1) && !group.FirstOrDefault().IsExpense)
+                if ((sum < lspqty || num2 is 1) && !group.FirstOrDefault().IsExpense)
                 {
-                    qty = sum;
+                    lspqty = sum;
                     Leastsoldprd = group.Key;
+                    Leastsoldprdcost = sum;
+                    ++num2;
                 }
 
                 //This finds the Most sold service
-                if ((sum > qty || num is 1) && group.FirstOrDefault().IsExpense)
+                if ((sum > mssrv || num3 is 1) && group.FirstOrDefault().IsExpense)
                 {
-                    qty = sum;
+                    mssrv = sum;
                     Mostsoldsrvc = group.Key;
+                    Mostsoldsrvcost = sum;
+                    ++num3;
                 }
 
                 //This finds then Least sold service
-                if ((sum < qty || num is 1) && group.FirstOrDefault().IsExpense)
+                if ((sum < lssrv || num4 is 1) && group.FirstOrDefault().IsExpense)
                 {
-                    qty = sum;
+                    lssrv = sum;
                     Leastsoldsrvc = group.Key;
+                    Leastsoldsrvcost = sum;
+                    ++num4;
                 }
 
-                ++num;
             }
-            num = 1;
-            qty = 0;
+            
         }
 
 

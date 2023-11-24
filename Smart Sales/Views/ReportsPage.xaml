@@ -11,24 +11,26 @@
              Shell.NavBarIsVisible="False"
              Shell.BackgroundColor="#f5f6f8">
     <ScrollView>
-        <VerticalStackLayout Spacing="30" BackgroundColor="#f5f6f8">
-            <Grid RowDefinitions="Auto,Auto" HorizontalOptions="Center">
-                <Label Text="REPORTS" FontAttributes="Bold" FontSize="18" TextColor="Black"/>
-                <Label Text="ANALYTICS AND SUMMARY OF COLLECTED DATA" FontSize="15" TextColor="Black" FontAttributes="Bold"  Grid.Row="1"/>
+        <VerticalStackLayout Spacing="20" BackgroundColor="#f5f6f8">
+            <Grid RowDefinitions="Auto,Auto,Auto" HorizontalOptions="Center" RowSpacing="5">
+                <Label Text="REPORTS" FontAttributes="Bold" FontSize="21" HorizontalOptions="Center" TextColor="Black"/>
+                <Label Text="ANALYTICS AND SUMMARY OF COLLECTED DATA" HorizontalOptions="Center" FontSize="14" TextColor="Black" FontAttributes="Bold"  Grid.Row="1"/>
+
+                <tabview:SfTabView Grid.Row="2" x:Name="tabView"  TabBarBackground="white" IndicatorPlacement="Bottom"   SelectedIndex="11"  IndicatorBackground="#0370DF"  ItemsSource="{Binding dates}" >
+                    <tabview:SfTabView.HeaderItemTemplate >
+                        <DataTemplate x:DataType="models:InvoiceList">
+                            <Label TextColor="Black"  FontAttributes="Bold" FontSize="18"  Padding="5,10,10,10"  Text="{Binding IDate}">
+                                <Label.GestureRecognizers >
+                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:ReportsViewModel}},Path=SortallDataCommand}" CommandParameter="{Binding .}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </DataTemplate>
+                    </tabview:SfTabView.HeaderItemTemplate>
+                </tabview:SfTabView>
             </Grid>
-            <tabview:SfTabView x:Name="tabView"  TabBarBackground="white" IndicatorPlacement="Bottom"   SelectedIndex="11"  IndicatorBackground="#0370DF"  ItemsSource="{Binding dates}" >
-                <tabview:SfTabView.HeaderItemTemplate >
-                    <DataTemplate x:DataType="models:InvoiceList">
-                        <Label TextColor="Black"  FontAttributes="Bold" FontSize="18"  Padding="5,10,10,10"  Text="{Binding IDate}">
-                            <Label.GestureRecognizers >
-                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:ReportsViewModel}},Path=SortallDataCommand}" CommandParameter="{Binding .}" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </DataTemplate>
-                </tabview:SfTabView.HeaderItemTemplate>
-            </tabview:SfTabView>
             
-            <Grid RowDefinitions="Auto,Auto,Auto,Auto" Padding="15,15" RowSpacing="20">
+            
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" Padding="15,15" RowSpacing="20">
                 
                 <Border Grid.Row="0"
                     StrokeThickness="0"
@@ -76,7 +78,48 @@
 
                 </Border>
 
-                <Border Grid.Row="1"
+                <ScrollView Orientation="Horizontal" Grid.Row="1" HorizontalScrollBarVisibility="Never">
+                    <HorizontalStackLayout Spacing="15">
+                        <Border BackgroundColor="white" 
+                             StrokeThickness="0" 
+                             HeightRequest="120" 
+                             StrokeShape="RoundRectangle 10,10,10,10"
+                             WidthRequest="170">
+                            <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10">
+                                <Label Text="GROSS INCOME" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
+                                <Label Grid.Row="1" Text="{Binding Myincome,StringFormat='{0:N0} TZS'}" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                                
+                            </Grid>
+                        </Border>
+
+                        <Border StrokeThickness="0"
+                                 HeightRequest="120" 
+                                 BackgroundColor="White"
+                                 StrokeShape="RoundRectangle 10,10,10,10"
+                                 WidthRequest="170">
+                            <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10" >
+                                <Label Text="TOTAL EXPENSES" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
+                                <Label Grid.Row="1" Text="{Binding Myexpense,StringFormat='{0:N0} TZS'}" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                                
+                            </Grid>
+                        </Border>
+
+                        <Border BackgroundColor="white" 
+                             StrokeThickness="0" 
+                             HeightRequest="120" 
+                             StrokeShape="RoundRectangle 10,10,10,10"
+                             WidthRequest="170">
+                            <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10">
+                                <Label Text="NET INCOME" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
+                                <Label Grid.Row="1" Text="{Binding Mynetincome,StringFormat='{0:N0} TZS'}" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
+                                
+                            </Grid>
+                        </Border>
+
+                    </HorizontalStackLayout>
+                </ScrollView>
+
+                <Border Grid.Row="2"
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 10,10,10,10"
                     Background="white"
@@ -121,7 +164,64 @@
                     </charts:SfCartesianChart>
                 </Border>
 
-                <Border Grid.Row="2"
+                <ScrollView Orientation="Horizontal" Grid.Row="3" HorizontalScrollBarVisibility="Never">
+                    <HorizontalStackLayout Spacing="15">
+                        <Border BackgroundColor="white" 
+                             StrokeThickness="0" 
+                             HeightRequest="120" 
+                             StrokeShape="RoundRectangle 10,10,10,10"
+                             WidthRequest="170">
+                            <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10">
+                                <Label Text="MOST SOLD PRODUCT" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
+                                <Label Grid.Row="1" Text="{Binding Mostsoldprd}" TextColor="Black" FontAttributes="Bold" FontSize="17"/>
+                                <Label Grid.Row="2" Text="{Binding Mostsoldprdcost,StringFormat='TZS {0:N0}'}" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
+
+                            </Grid>
+                        </Border>
+
+                        <Border StrokeThickness="0"
+                                 HeightRequest="120" 
+                                 BackgroundColor="White"
+                                 StrokeShape="RoundRectangle 10,10,10,10"
+                                 WidthRequest="170">
+                            <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10" >
+                                <Label Text="LEAST SOLD PRODUCT" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
+                                <Label Grid.Row="1" Text="{Binding Leastsoldprd}" TextColor="Black" FontAttributes="Bold" FontSize="17"/>
+                                <Label Grid.Row="2" Text="{Binding Leastsoldprdcost,StringFormat='TZS {0:N0}'}" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
+
+                            </Grid>
+                        </Border>
+
+                        <Border BackgroundColor="white" 
+                             StrokeThickness="0" 
+                             HeightRequest="120" 
+                             StrokeShape="RoundRectangle 10,10,10,10"
+                             WidthRequest="170">
+                            <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10">
+                                <Label Text="MOST SPENT SERVICE" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
+                                <Label Grid.Row="1" Text="{Binding Mostsoldsrvc}" TextColor="Black" FontAttributes="Bold" FontSize="17"/>
+                                <Label Grid.Row="2" Text="{Binding Mostsoldsrvcost,StringFormat='TZS {0:N0}'}" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
+
+                            </Grid>
+                        </Border>
+
+                        <Border BackgroundColor="white" 
+                             StrokeThickness="0" 
+                             HeightRequest="120" 
+                             StrokeShape="RoundRectangle 10,10,10,10"
+                             WidthRequest="170">
+                            <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10">
+                                <Label Text="LEAST SPENT SERVICE" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
+                                <Label Grid.Row="1" Text="{Binding Leastsoldsrvc}" TextColor="Black" FontAttributes="Bold" FontSize="17"/>
+                                <Label Grid.Row="2" Text="{Binding Leastsoldsrvcost,StringFormat='TZS {0:N0}'}" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
+
+                            </Grid>
+                        </Border>
+
+                    </HorizontalStackLayout>
+                </ScrollView>
+
+                <Border Grid.Row="4"
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 10,10,10,10"
                         Background="white"

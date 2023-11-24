@@ -51,7 +51,7 @@ public partial class AddInvoicePage : ContentPage
         var text = entryQty.Text;
 
         double Qty = double.Parse(text);
-		double cost = double.Parse(lblprdcost.Text);
+        double cost = double.Parse(lblprdcost.Text);
 
         viewModel.Myinvoice.Cost = Qty * cost;
         lblttlcost.Text = viewModel.Myinvoice.Cost.ToString();
@@ -66,32 +66,32 @@ public partial class AddInvoicePage : ContentPage
 
         var picker = sender as Picker;
 
-            var text = picker.SelectedItem as string;
+        var text = picker.SelectedItem as string;
 
-            if (text.Equals("Jumla"))
-            {
-                viewModel.Myinvoice.ProductCost = viewModel.Myproduct.JumlaPrice;
-                lblprdcost.Text = viewModel.Myproduct.JumlaPrice.ToString();
+        if (text.Equals("Jumla"))
+        {
+            viewModel.Myinvoice.ProductCost = viewModel.Myproduct.JumlaPrice;
+            lblprdcost.Text = viewModel.Myproduct.JumlaPrice.ToString();
 
-                calculateCost();
-            }
-            else
-            {
-                viewModel.Myinvoice.ProductCost = viewModel.Myproduct.RetailPrice;
-                lblprdcost.Text = viewModel.Myproduct.RetailPrice.ToString();
+            calculateCost();
+        }
+        else
+        {
+            viewModel.Myinvoice.ProductCost = viewModel.Myproduct.RetailPrice;
+            lblprdcost.Text = viewModel.Myproduct.RetailPrice.ToString();
 
-                calculateCost();
-            }
-        
+            calculateCost();
+        }
+
     }
 
     //entry for the quantity method
     private void entryQty_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (viewModel.Myinvoice.CantEdit )
+        if (viewModel.Myinvoice.CantEdit)
         { return; }
         var text = e.NewTextValue;
-        if (string.IsNullOrWhiteSpace(text)) {  return; }
+        if (string.IsNullOrWhiteSpace(text)) { return; }
 
         double Qty = double.Parse(text);
 
@@ -102,9 +102,9 @@ public partial class AddInvoicePage : ContentPage
     // method for the picker of products
     private void productpicker_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if(viewModel.Myinvoice.CantEdit || productpicker.SelectedItem is null || ctgpicker.SelectedItem is null)
+        if (viewModel.Myinvoice.CantEdit || productpicker.SelectedItem is null || ctgpicker.SelectedItem is null)
         { return; }
-        
+
         var text = ctgpicker.SelectedItem as string;
         if (text.Equals("Jumla"))
         {
@@ -130,7 +130,7 @@ public partial class AddInvoicePage : ContentPage
     // method for the entry which displays the product cost
     private void lblprdcost_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if(viewModel.Myinvoice.CantEdit) 
+        if (viewModel.Myinvoice.CantEdit)
         { return; }
         var text = entryQty.Text;
 

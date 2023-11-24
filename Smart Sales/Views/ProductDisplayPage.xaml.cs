@@ -18,6 +18,7 @@ public partial class ProductDisplayPage : ContentPage
         base.OnAppearing();
         viewModel.SortAllInvoicesCommand.Execute(new InvoiceList() {
             InvoiceDate=DateTime.Now });
+        viewModel.SortInvoicesonDate(DateTime.Now);
     }
 
     private void datepicker_DateSelected(object sender, DateChangedEventArgs e)

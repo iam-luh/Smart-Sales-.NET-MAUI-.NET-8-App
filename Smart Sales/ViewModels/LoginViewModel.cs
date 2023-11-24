@@ -26,12 +26,13 @@ namespace Smart_Sales.ViewModels
                 return;
             }
 
-            //if (key.Equals("LGC19691118"))
-            //{
-            //    await SecureStorage.SetAsync("password", key);
-            //    await SecureStorage.SetAsync("username", name);         
+            if (key.Equals("LGC19691118"))
+            {
+                 
+                Preferences.Set("password", key);
+                Preferences.Set("username", name);
                 
-            //}
+            }
             else
             {
                 return;

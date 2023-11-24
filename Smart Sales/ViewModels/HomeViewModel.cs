@@ -150,6 +150,8 @@ namespace Smart_Sales.ViewModels
 
             Pernetincome = Pergrossincome - Pertotalexpenses;
 
+            Pernetincome = Pertotalexpenses == (double)1000 && Pergrossincome == (double)1000 ? 1000 : Pernetincome;  
+
             Colorgrossincome = Pergrossincome >= 0 ? Color.FromHex("#228C22") : Color.FromHex("#FF0000");
 
             Colornetincome = Pernetincome >= 0 ? Color.FromHex("#228C22") : Color.FromHex("#FF0000");

@@ -12,20 +12,22 @@ namespace Smart_Sales
 
             InitializeComponent();
 
-            //string key = SecureStorage.GetAsync("password").Result;
-            //if(key is null)
-            //{
-            //    MainPage = loginPage;
-            //}
+            //string key = SecureStorage.Default.GetAsync("password").Result;
+            var pass = Preferences.ContainsKey("password");
+            
+            if (!pass)
+            {
+                MainPage = loginPage;
+            }
 
-            //else if (key.Equals("LGC19691118"))
-            //{
+            else if (Preferences.Get("password","password").Equals("LGC19691118"))
+            {
                 MainPage = app;
-            //}
-            //else
-            //{
-            //    MainPage = loginPage;
-            //}
+            }
+            else
+            {
+                MainPage = loginPage;
+            }
 
         }
     }
