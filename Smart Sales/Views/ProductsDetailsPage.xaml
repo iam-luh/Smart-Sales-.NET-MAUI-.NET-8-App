@@ -19,7 +19,7 @@
             Background="white"
             HeightRequest="50"        
             Padding="5,0" >
-                    <Entry VerticalOptions="Center" Placeholder="Name of the Product" TextColor="Black" Text="{Binding Myproduct.Name, Mode=TwoWay}"/>
+                    <Entry VerticalOptions="Center" Placeholder="Name of the Product" FontSize="16" TextColor="Black" Text="{Binding Myproduct.Name, Mode=TwoWay}"/>
                 </Border>
             </Grid>
 
@@ -31,7 +31,7 @@
             Background="white"
             HeightRequest="70"        
             Padding="5,0" >
-                    <Entry VerticalOptions="Center" Placeholder="Short Description of the Product" TextColor="Black"  Text="{Binding Myproduct.Description, Mode=TwoWay}"/>
+                    <Entry VerticalOptions="Center" FontSize="16" Placeholder="Short Description of the Product" TextColor="Black"  Text="{Binding Myproduct.Description, Mode=TwoWay}"/>
                 </Border>
             </Grid>
 
@@ -43,7 +43,7 @@
                Background="white"
                HeightRequest="50"        
                Padding="5,0" >
-                    <Picker VerticalOptions="Center" Title="Select the Units of the Product" TextColor="Black" x:Name="unitpicker" 
+                    <Picker VerticalOptions="Center" FontSize="16" Title="Select the Units of the Product" TextColor="Black" x:Name="unitpicker" 
                  SelectedIndexChanged="unitpicker_SelectedIndexChanged" 
                  BackgroundColor="White"
                  SelectedItem="{Binding Myproduct.ProductUnit,Mode=TwoWay}">
@@ -68,7 +68,7 @@
             Background="white"
             HeightRequest="50"        
             Padding="5,0" >
-                    <Entry VerticalOptions="Center" Keyboard="Numeric" Placeholder="WholeSale Price of the Product" TextColor="Black" Text="{Binding Myproduct.JumlaPrice, Mode=TwoWay}"/>
+                    <Entry VerticalOptions="Center" Keyboard="Numeric" Placeholder="WholeSale Price of the Product" FontSize="16" TextColor="Black" Text="{Binding Myproduct.JumlaPrice, Mode=TwoWay}"/>
                 </Border>
             </Grid>
 
@@ -80,16 +80,16 @@
                 Background="white"
                 HeightRequest="50"        
                 Padding="5,0" >
-                    <Entry VerticalOptions="Center" Keyboard="Numeric" Placeholder="Retail Price of the Product" TextColor="Black" Text="{Binding Myproduct.RetailPrice, Mode=TwoWay}"/>
+                    <Entry VerticalOptions="Center" Keyboard="Numeric" FontSize="16" Placeholder="Retail Price of the Product" TextColor="Black" Text="{Binding Myproduct.RetailPrice, Mode=TwoWay}"/>
                 </Border>
             </Grid>
 
             <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
                 <Label Text="Does this Product bring an Expense or Income: " TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
-                <buttons:SfRadioGroup Grid.Row="1"  x:Name="ExpensebtnGrp" CheckedChanged="ExpensebtnGrp_CheckedChanged">
+                <buttons:SfRadioGroup Grid.Row="1"   x:Name="ExpensebtnGrp" CheckedChanged="ExpensebtnGrp_CheckedChanged">
 
-                    <buttons:SfRadioButton Text="Expense" x:Name="expense"/>
-                    <buttons:SfRadioButton Text="Income"   x:Name="income"/>
+                    <buttons:SfRadioButton Text="Expense" FontSize="16" x:Name="expense"/>
+                    <buttons:SfRadioButton Text="Income" FontSize="16"  x:Name="income"/>
 
                 </buttons:SfRadioGroup>
 
@@ -98,7 +98,7 @@
 
 
 
-            <Button Text="Save" FontAttributes="Bold" BackgroundColor="#0370DF" TextColor="White" FontSize="16" Command="{Binding AddUpdateProductCommand}"/>
+            <Button Text="Save" FontAttributes="Bold" BackgroundColor="#0370DF" TextColor="White" FontSize="17" Command="{Binding AddUpdateProductCommand}"/>
 
 
 
