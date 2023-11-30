@@ -9,18 +9,19 @@ namespace Smart_Sales.Services
 {
     public class InvoiceService : IInvoiceService
     {
+        public InvoiceService()
+        {
+            SetUpDb();
+        }
         private SQLiteAsyncConnection conn;
-        //public InvoiceService()
-        //{ 
-        //    SetUpDb();
-        //}
+       
 
-        public async void SetUpDb()
+        public  void SetUpDb()
         {            
             if (conn is null)
             {   string dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Invoices.db3");
                 conn = new SQLiteAsyncConnection(dbpath);
-                await conn.CreateTableAsync<Invoice>();
+                 conn.CreateTableAsync<Invoice>();
             }           
         }
 

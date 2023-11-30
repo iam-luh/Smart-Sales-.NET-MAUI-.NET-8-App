@@ -22,6 +22,9 @@ namespace Smart_Sales
             builder.Services.AddTransient<AppShell>();
             builder.Services.AddSingleton<IInvoiceService, InvoiceService>();
             builder.Services.AddSingleton<IProductService, ProductService>();
+            builder.Services.AddSingleton<IPasswordService, PasswordService>();
+            builder.Services.AddSingleton<IUsernameService, UsernameService>();
+
 
             builder.Services.AddTransient<HomeViewModel>();
             builder.Services.AddSingleton<InvoicesViewModel>();

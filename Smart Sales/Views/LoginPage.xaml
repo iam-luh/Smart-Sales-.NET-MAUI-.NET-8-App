@@ -7,7 +7,7 @@
     <Grid BackgroundColor="#f5f6f8">
         <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="10" ColumnDefinitions="Auto" BackgroundColor="#f5f6f8" VerticalOptions="Center" HorizontalOptions="Center">
 
-            <Image Source="smartsales.png"  HeightRequest="250" WidthRequest="250" Margin="0,-80,0,0" />
+            <Image Source="smartsalesz.png"  HeightRequest="250" WidthRequest="250" Margin="0,-80,0,0" />
 
             <Grid RowSpacing="10" RowDefinitions="Auto,Auto" Grid.Row="1">
                 <Label Text="Username" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>

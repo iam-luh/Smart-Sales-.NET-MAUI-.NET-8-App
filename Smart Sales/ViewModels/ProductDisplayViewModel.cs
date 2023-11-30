@@ -67,8 +67,8 @@ namespace Smart_Sales.ViewModels
 
             var myinvoices = invoiceService.GetAllInvoices().Result;
 
-            var invoicelist = myinvoices.Where(i => i.CreatedDate.Month == list.InvoiceDate.Month && i.CreatedDate.Year == list.InvoiceDate.Year && i.Name == MyProduct.Name)
-                                                                       .OrderByDescending(i => i.CreatedDate);
+            var invoicelist = myinvoices.Where(i => i.LastUpdatedDate.Month == list.InvoiceDate.Month && i.LastUpdatedDate.Year == list.InvoiceDate.Year && i.Name == MyProduct.Name)
+                                                                       .OrderByDescending(i => i.LastUpdatedDate);
 
             foreach (var item in invoicelist)
             {

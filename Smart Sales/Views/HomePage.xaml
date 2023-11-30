@@ -11,8 +11,12 @@
              Shell.NavBarIsVisible="False"
              Shell.BackgroundColor="#f5f6f8">
     <ScrollView>
+        
         <VerticalStackLayout BackgroundColor="#f5f6f8" Padding="20,15" Spacing="20">
-
+            <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="5">
+                <ImageButton Source="contacticon.svg" HeightRequest="35" WidthRequest="35" />
+                <Label Grid.Column="1" VerticalOptions="Center" x:Name="lblgreet" FontSize="15" FontAttributes="Bold" TextColor="Gray"/>
+            </Grid>
             <Border 
         StrokeThickness="0"
         StrokeShape="RoundRectangle 10,10,10,10"

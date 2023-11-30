@@ -70,16 +70,21 @@
         </tabview:SfTabView>
 
         <Grid Padding="15,10">
-            <listview:SfListView x:Name="listView" HeightRequest="550" SelectionMode="None"  ItemsSource="{Binding ListInvoices}" >
+            <listview:SfListView x:Name="listView" ItemSize="75" HeightRequest="550" SelectionMode="None"  ItemsSource="{Binding ListInvoices}"  >
                 <listview:SfListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid RowDefinitions="Auto,Auto"  x:DataType="models:Invoice" >
-                                <Label Text="{Binding Name}"  TextColor="Black" FontAttributes="Bold"/>
+                            <Grid RowDefinitions="Auto,Auto,Auto"  x:DataType="models:Invoice" Padding="0,15">
+                                <Grid ColumnDefinitions="Auto,Auto,Auto">
+                                    <Label Text="{Binding Name}" TextColor="Black" FontAttributes="Bold"/>
+                                    <Label Margin="5,0,0,0" Grid.Column="1" Text="{Binding Quantity,StringFormat='x {0}'}" TextColor="Black" FontAttributes="Bold"/>
+                                    <Label Grid.Column="2" Text="{Binding ProductUnit}" TextColor="Black" FontAttributes="Bold"/>
+                                </Grid>
                                 <Label HorizontalOptions="End" Text="{Binding Cost}" TextColor="Black" FontAttributes="Bold"/>
-                                <Label Grid.Row="1" Text="{Binding CreatedDate, StringFormat='{0: dd MMM yyyy}'}" TextColor="Black" FontAttributes="Bold"/>
+                                <Label Grid.Row="2" Text="{Binding CustomerName,StringFormat='Paid By : {0}'}"  TextColor="Black" FontAttributes="Bold"/>
+                                <Label Grid.Row="1" Text="{Binding LastUpdatedDate, StringFormat='{0:dd MMM yyyy}'}" TextColor="Black" FontAttributes="Bold"/>
                                 <Label Grid.Row="1" HorizontalOptions="End" Text="Completed" TextColor="Green" IsVisible="{Binding IsPaid}" FontAttributes="Bold"/>
-                                <Label Grid.Row="1" HorizontalOptions="End" Text="Pending" TextColor="#f2b862" FontAttributes="Bold" IsVisible="{Binding IsNotPaid}" />                                
+                                <Label Grid.Row="1" HorizontalOptions="End" Text="Pending" TextColor="#f2b862" FontAttributes="Bold" IsVisible="{Binding IsNotPaid}" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

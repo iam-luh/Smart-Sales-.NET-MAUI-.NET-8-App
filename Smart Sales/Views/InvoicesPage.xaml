@@ -10,87 +10,76 @@
              x:DataType="viewmodels:InvoicesViewModel"
              Title="InvoicesPage"
              Shell.NavBarIsVisible="False">
+    <ScrollView BackgroundColor="#f5f6f8">
+        <VerticalStackLayout BackgroundColor="#f5f6f8" Padding="0,20" Spacing="10">
 
-    <VerticalStackLayout BackgroundColor="#f5f6f8" Padding="0,15" Spacing="10">
+            <Grid RowDefinitions="Auto,Auto" RowSpacing="3">
+                <Label Text="INVOICES" FontAttributes="Bold" FontSize="21" HorizontalOptions="Center" TextColor="Black"/>
+                <Label Text="A LIST OF ALL THE INVOICES " HorizontalOptions="Center" FontSize="15" TextColor="Black" FontAttributes="Bold"  Grid.Row="1"/>
 
-        <Grid RowDefinitions="Auto,Auto" RowSpacing="3">
-            <Label Text="INVOICES" FontAttributes="Bold" FontSize="21" HorizontalOptions="Center" TextColor="Black"/>
-            <Label Text="A LIST OF ALL THE INVOICES " HorizontalOptions="Center" FontSize="15" TextColor="Black" FontAttributes="Bold"  Grid.Row="1"/>
+            </Grid>
 
-        </Grid>
-        
-        <tabview:SfTabView x:Name="tabView"  TabBarBackground="white" IndicatorPlacement="Bottom"   SelectedIndex="11"  IndicatorBackground="#0370DF"  ItemsSource="{Binding dates}" >
-            <tabview:SfTabView.HeaderItemTemplate >
-                <DataTemplate x:DataType="models:InvoiceList">
-                    <Label TextColor="Black"  FontAttributes="Bold" FontSize="16"  Padding="5,10,10,10"  Text="{Binding InvoiceDate, StringFormat='{0:MMM/yyy}'}">
-                        <Label.GestureRecognizers >
-                            <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:InvoicesViewModel}},Path=SortAllInvoicesCommand}" CommandParameter="{Binding .}" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                </DataTemplate>
-            </tabview:SfTabView.HeaderItemTemplate>
-        </tabview:SfTabView>
-
-        <Grid >
-            <listview:SfListView  x:Name="listView" ItemSize="75"  HeightRequest="550" SelectionMode="None" ItemsSource="{Binding ListInvoices}" >
-                <!--<listview:SfListView.DataSource >
-                    <data:DataSource LiveDataUpdateMode="AllowDataShaping">
-                        <data:DataSource.GroupDescriptors>
-                            <data:GroupDescriptor PropertyName="LastUpdatedDate"/>
-                        </data:DataSource.GroupDescriptors>
-                    </data:DataSource>
-                </listview:SfListView.DataSource>
-
-                <listview:SfListView.GroupHeaderTemplate>
-                    <DataTemplate x:Name="GHeaderTemplate" >
-                        <ViewCell>
-                            <Grid>
-                                <Label x:DataType="models:Invoice" Text="{Binding LastUpdatedDate, StringFormat='{0: dd MMM yyyy}'}" BackgroundColor="#f5f6f8" TextColor="Black" FontAttributes="Bold" FontSize="15"/>
-                                <Label Text="{Binding }"/>
-                            </Grid>
-                        </ViewCell>
+            <tabview:SfTabView x:Name="tabView"  TabBarBackground="white" IndicatorPlacement="Bottom"   SelectedIndex="11"  IndicatorBackground="#0370DF"  ItemsSource="{Binding dates}" >
+                <tabview:SfTabView.HeaderItemTemplate >
+                    <DataTemplate x:DataType="models:InvoiceList">
+                        <Label TextColor="Black"  FontAttributes="Bold" FontSize="16"  Padding="5,10,10,10"  Text="{Binding InvoiceDate, StringFormat='{0:MMM/yyy}'}">
+                            <Label.GestureRecognizers >
+                                <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:InvoicesViewModel}},Path=SortAllInvoicesCommand}" CommandParameter="{Binding .}" />
+                            </Label.GestureRecognizers>
+                        </Label>
                     </DataTemplate>
-                </listview:SfListView.GroupHeaderTemplate>-->
+                </tabview:SfTabView.HeaderItemTemplate>
+            </tabview:SfTabView>
 
-                <listview:SfListView.ItemTemplate>
-                    <DataTemplate  >
-                        <ViewCell >
-                            <SwipeView x:DataType="models:Invoice" >
-                                <SwipeView.RightItems>
-                                    <SwipeItems>
-                                        <SwipeItem 
+            <Grid >
+                <listview:SfListView  x:Name="listView" ItemSize="75"  HeightRequest="550" SelectionMode="None" ItemsSource="{Binding ListInvoices}" >
+
+                    <listview:SfListView.ItemTemplate>
+                        <DataTemplate  >
+                            <ViewCell >
+                                <SwipeView x:DataType="models:Invoice" >
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem 
                                        IconImageSource="delete.png"                                              
                                        BackgroundColor="Red"
                                        Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:InvoicesViewModel}},Path=DeleteInvoiceCommand}"                    
                                        CommandParameter="{Binding .}" />
 
-                                    </SwipeItems>
-                                </SwipeView.RightItems>
-                                <SwipeView.LeftItems>
-                                    <SwipeItems>
-                                        <SwipeItem 
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <SwipeView.LeftItems>
+                                        <SwipeItems>
+                                            <SwipeItem 
                                        IconImageSource="edit.png"                                              
                                        BackgroundColor="#0370DF"
                                        Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:InvoicesViewModel}},Path=GoToInvoiceDetailsCommand}"                    
                                        CommandParameter="{Binding .}" />
-                                    </SwipeItems>
-                                </SwipeView.LeftItems>
-                                <Grid RowDefinitions="Auto,Auto,Auto"  x:DataType="models:Invoice" BackgroundColor="#f5f6f8" Padding="10,15">
-                                    <Label Text="{Binding Name}" TextColor="Black" FontAttributes="Bold"/>
-                                    <Label HorizontalOptions="End" Text="{Binding Cost}" TextColor="Black" FontAttributes="Bold"/>
-                                    <Label Grid.Row="2" Text="{Binding CustomerName,StringFormat='Paid By : {0}'}"  TextColor="Black" FontAttributes="Bold"/>
-                                    <Label Grid.Row="1" Text="{Binding LastUpdatedDate, StringFormat='{0:dd MMM yyyy}'}" TextColor="Black" FontAttributes="Bold"/>
-                                    <Label Grid.Row="1" HorizontalOptions="End" Text="Completed" TextColor="Green" IsVisible="{Binding IsPaid}" FontAttributes="Bold"/>
-                                    <Label Grid.Row="1" HorizontalOptions="End" Text="Pending" TextColor="#f2b862" FontAttributes="Bold" IsVisible="{Binding IsNotPaid}" />
-                                </Grid>
-                            </SwipeView>
-                        </ViewCell>
-                    </DataTemplate>
-                </listview:SfListView.ItemTemplate>
-            </listview:SfListView>
-        </Grid>
+                                        </SwipeItems>
+                                    </SwipeView.LeftItems>
+                                    <Grid RowDefinitions="Auto,Auto,Auto"  x:DataType="models:Invoice" BackgroundColor="#f5f6f8" Padding="10,15">
+                                        <Grid ColumnDefinitions="Auto,Auto,Auto">
+                                            <Label Text="{Binding Name}" TextColor="Black" FontAttributes="Bold"/>
+                                            <Label Margin="5,0,0,0" Grid.Column="1" Text="{Binding Quantity,StringFormat='x {0}'}" TextColor="Black" FontAttributes="Bold"/>
+                                            <Label Grid.Column="2" Text="{Binding ProductUnit}" TextColor="Black" FontAttributes="Bold"/>
+                                        </Grid>
+                                        <Label HorizontalOptions="End" Text="{Binding Cost}" TextColor="Black" FontAttributes="Bold"/>
+                                        <Label Grid.Row="2" Text="{Binding CustomerName,StringFormat='Paid By : {0}'}"  TextColor="Black" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" Text="{Binding LastUpdatedDate, StringFormat='{0:dd MMM yyyy}'}" TextColor="Black" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" HorizontalOptions="End" Text="Completed" TextColor="Green" IsVisible="{Binding IsPaid}" FontAttributes="Bold"/>
+                                        <Label Grid.Row="1" HorizontalOptions="End" Text="Pending" TextColor="#f2b862" FontAttributes="Bold" IsVisible="{Binding IsNotPaid}" />
+                                    </Grid>
+                                </SwipeView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </listview:SfListView.ItemTemplate>
 
-    </VerticalStackLayout>
+                </listview:SfListView>
+            </Grid>
+            
+        </VerticalStackLayout>
+
+    </ScrollView>
 </ContentPage>
 
 <!--Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodel:TaskListViewModel}},Path=DeleteTaskCommand}" CommandParameter="{Binding PopupTask}-->

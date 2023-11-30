@@ -10,18 +10,18 @@ namespace Smart_Sales.Services
     public class ProductService : IProductService
     {
         private SQLiteAsyncConnection conn;
-        //public ProductService()
-        //{ 
-        //    SetUpDb();
-        //}
+        public ProductService()
+        {
+            SetUpDb();
+        }
 
-        public async void SetUpDb()
+        public  void SetUpDb()
         {
             
             if (conn is null)
             {   string dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Products.db3");
                 conn = new SQLiteAsyncConnection(dbpath);
-                await conn.CreateTableAsync<Product>();
+                conn.CreateTableAsync<Product>();
             }           
         }
 

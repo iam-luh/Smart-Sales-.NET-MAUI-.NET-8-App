@@ -47,20 +47,40 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\Images\smartsaleslogo.png" Color="White" ForegroundScale="0.80" />
+		<MauiSplashScreen Include="Resources\Splash\smartsplash.png">
+		  <Color>White</Color>
+		  <ForegroundScale>1.0</ForegroundScale>
+		</MauiSplashScreen>
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<!--<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />-->
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+		<MauiImage Update="Resources\Images\smartsalesz.png">
+		  <Color>White</Color>
+		  <ForegroundScale>0.50</ForegroundScale>
+		</MauiImage>
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\smartsales.png" />
+	  <MauiImage Remove="Resources\Images\smartsaleslogo.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\contacticon.svg" />
+	  <None Remove="Resources\Images\smartsaleslogo.png" />
+	  <None Remove="Resources\Images\smartsalesz.png" />
+	  <None Remove="Resources\Splash\smartsplash.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -78,33 +98,6 @@
 		<PackageReference Include="Syncfusion.Maui.Core" Version="23.2.4" />
 		<PackageReference Include="Syncfusion.Maui.ListView" Version="23.2.4" />
 		<PackageReference Include="Syncfusion.Maui.TabView" Version="23.2.4" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
-	  <PackageReference Include="Xamarin.Android.Glide">
-	    <Version>4.16.0.1</Version>
-	  </PackageReference>
-	  <PackageReference Include="Xamarin.AndroidX.Browser">
-	    <Version>1.7.0</Version>
-	  </PackageReference>
-	  <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4">
-	    <Version>1.0.0.21</Version>
-	  </PackageReference>
-	  <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData">
-	    <Version>2.6.2.2</Version>
-	  </PackageReference>
-	  <PackageReference Include="Xamarin.AndroidX.Navigation.Common">
-	    <Version>2.7.5</Version>
-	  </PackageReference>
-	  <PackageReference Include="Xamarin.AndroidX.Navigation.Fragment">
-	    <Version>2.7.5</Version>
-	  </PackageReference>
-	  <PackageReference Include="Xamarin.AndroidX.Navigation.Runtime">
-	    <Version>2.7.5</Version>
-	  </PackageReference>
-	  <PackageReference Include="Xamarin.AndroidX.Navigation.UI">
-	    <Version>2.7.5</Version>
-	  </PackageReference>
 	</ItemGroup>
 
 </Project>
