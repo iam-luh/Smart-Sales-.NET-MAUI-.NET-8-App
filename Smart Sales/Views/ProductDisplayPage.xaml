@@ -12,44 +12,50 @@
     <VerticalStackLayout BackgroundColor="#f5f6f8">
         <HorizontalStackLayout Spacing="20" Padding="15,20,15,0">
             <ImageButton Source="backbtn.svg"  HeightRequest="30" WidthRequest="30" Command="{Binding GoBackCommand}" />
-            <Label VerticalOptions="Center" Margin="60,0,0,0" Text="Product Details" TextColor="Black" FontSize="17" FontAttributes="Bold"/>
-            <ImageButton Source="editbtn.png" Margin="15,0,0,0"  HeightRequest="25" WidthRequest="25" Command="{Binding GoToProductDetailsCommand}" CommandParameter="{Binding MyProduct}"/>
-            <ImageButton Source="sdelete.png"  HeightRequest="25" WidthRequest="25" Command="{Binding DeleteProductCommand}" CommandParameter="{Binding MyProduct}"/>
+            <Label VerticalOptions="Center" Margin="10,0,0,0" Text="Product Details" TextColor="Black" FontSize="17" FontAttributes="Bold"/>
+            <ImageButton Source="editbtn.png" Margin="0,0,0,0"  HeightRequest="29" WidthRequest="29" Command="{Binding GoToProductDetailsCommand}" CommandParameter="{Binding MyProduct}"/>
+            <ImageButton x:Name="addimg" Source="blackaddbtn.png" HeightRequest="29" WidthRequest="29" Clicked="addimg_Clicked_1" />
+            <ImageButton Source="sdelete.png"  HeightRequest="29" WidthRequest="29" Command="{Binding DeleteProductCommand}" CommandParameter="{Binding MyProduct}"/>
         </HorizontalStackLayout>
         
-        <Grid BackgroundColor="#f5f6f8" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="5" ColumnDefinitions="Auto,Auto" Padding="10,30,10,0">
+        <Grid BackgroundColor="#f5f6f8" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="5" ColumnDefinitions="Auto,Auto" Padding="10,30,10,0">
             <Label TextColor="Black" FontSize="21" Grid.ColumnSpan="2" HorizontalOptions="Center" FontAttributes="Bold" Text="{Binding MyProduct.Name}"/>
             <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto" ColumnSpacing="20">
                 <Label  TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.JumlaPrice,StringFormat='WholeSale Price: {0} TZS'}"/>
                 <Label  Grid.Column="1"  TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.RetailPrice,StringFormat='Retail Price: {0} TZS  '}"/>
             </Grid>
 
-            <Grid Grid.Row="2" ColumnDefinitions="Auto,Auto" >
+            <Grid Grid.Row="2" ColumnDefinitions="Auto,Auto" ColumnSpacing="1">
+                <Label  x:Name="lblAvbleQty" TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.AvailableQuantity,StringFormat='Available Product/Service Quantity: {0}'}"/>
+                <Label  Grid.Column="1" TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.ProductUnit}"/>
+            </Grid>
+
+            <Grid Grid.Row="3" ColumnDefinitions="Auto,Auto" ColumnSpacing="1">
                 <Label  TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.JumlaSoldQty,StringFormat='WholeSale Products Sold: {0}'}"/>
                 <Label  Grid.Column="1" TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.ProductUnit}"/>
             </Grid>
 
-            <Grid Grid.Row="3" ColumnDefinitions="Auto,Auto" >
+            <Grid Grid.Row="4" ColumnDefinitions="Auto,Auto" ColumnSpacing="1">
                 <Label  TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.RetailSoldQty,StringFormat='Retail Products Sold: {0}'}"/>
                 <Label  Grid.Column="1" TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.ProductUnit}"/>
             </Grid>
 
-            <Grid Grid.Row="4" ColumnDefinitions="Auto,Auto">                
+            <Grid Grid.Row="5" ColumnDefinitions="Auto,Auto" ColumnSpacing="1">                
                 <Label  TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.TotalQuantity,StringFormat='Total Products Sold: {0}'}"/>
                 <Label  Grid.Column="1" TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.ProductUnit}"/>
             </Grid>
 
-            <Grid Grid.Row="5" ColumnDefinitions="Auto,Auto">
+            <Grid Grid.Row="6" ColumnDefinitions="Auto,Auto" ColumnSpacing="1">
                 <Label TextColor="Black" FontSize="14" FontAttributes="Bold" Text="Choose a Date: "/>
                 <DatePicker Grid.Column="1" FontAttributes="Bold"   Margin="0,-12,0,0"  DateSelected="datepicker_DateSelected" x:Name="datepicker" TextColor="#0370DF" FontSize="14"/>
             </Grid>
 
-            <Grid Grid.Row="6" ColumnDefinitions="Auto,Auto" Margin="0,-10,0,0">
+            <Grid Grid.Row="7" ColumnDefinitions="Auto,Auto" Margin="0,-10,0,0" ColumnSpacing="1">
                 <Label  TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding JumlaQtyLeo,StringFormat='WholeSale Products Sold on Date: {0}'}"/>
                 <Label x:Name="lbljumla"  Grid.Column="1" TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.ProductUnit}"/>
             </Grid>
 
-            <Grid Grid.Row="7" ColumnDefinitions="Auto,Auto" >
+            <Grid Grid.Row="8" ColumnDefinitions="Auto,Auto" ColumnSpacing="1">
                 <Label  TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding RetailQtyLeo,StringFormat='Retail Products Sold on Date: {0}'}"/>
                 <Label  x:Name="lblretail" Grid.Column="1" TextColor="Black" FontSize="14" FontAttributes="Bold" Text="{Binding MyProduct.ProductUnit}"/>
             </Grid>

@@ -136,10 +136,16 @@ namespace Smart_Sales.ViewModels
                 Myinvoice.IsExpense = Myproduct.IsExpense;
                 Myinvoice.ProductUnit = Myproduct.ProductUnit;
                 Myinvoice.LastUpdatedDate = Myinvoice.CreatedDate.Date + DateTime.Today.Add(Myinvoice.CreatedTime).TimeOfDay;
+               
                 // Changing the product quantity with the previous invoice
                 var invoice =  invoiceService.GetAllInvoices().Result.ElementAt
                     (invoiceService.GetAllInvoices().Result.FindIndex(i => i.Id == Myinvoice.Id));
-
+                if ((Myproduct.AvailableQuantity + invoice.Quantity - Myinvoice.Quantity)<0)
+                {
+                    await Shell.Current.DisplayAlert("NOT ENOUGH QUANTITY", $"{Myproduct.AvailableQuantity} REMAINING, UPDATE FAILURE", "OK");
+                    return;
+                }
+                Myproduct.AvailableQuantity = Myproduct.AvailableQuantity + invoice.Quantity - Myinvoice.Quantity;
                 Myproduct.TotalQuantity -= invoice.Quantity;
                 if (Myinvoice.Category.Equals("Jumla"))
                 {
@@ -149,7 +155,6 @@ namespace Smart_Sales.ViewModels
                 {
                     Myproduct.RetailSoldQty -= invoice.Quantity;
                 }
-                _ = productService.UpdateProduct(Myproduct).Result;
 
                 var response = await invoiceService.UpdateInvoice(Myinvoice);
 
@@ -177,7 +182,15 @@ namespace Smart_Sales.ViewModels
                 Myinvoice.CreatedTime = DateTime.Now.TimeOfDay;
             }
             else
-            {   Myproduct.TotalQuantity += Myinvoice.Quantity;
+            {
+                if ((Myproduct.AvailableQuantity  - Myinvoice.Quantity) < 0)
+                {
+                    await Shell.Current.DisplayAlert("NOT ENOUGH QUANTITY", $"{Myproduct.AvailableQuantity} REMAINING, CREATION FAILURE", "OK");
+                    return;
+                }
+                Myproduct.AvailableQuantity = Myproduct.AvailableQuantity - Myinvoice.Quantity;
+
+                Myproduct.TotalQuantity += Myinvoice.Quantity;
                 if (Myinvoice.Category.Equals("Jumla"))
                 {
                     Myproduct.JumlaSoldQty += Myinvoice.Quantity;

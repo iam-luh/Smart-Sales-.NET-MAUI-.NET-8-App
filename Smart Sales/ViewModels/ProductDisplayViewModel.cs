@@ -31,6 +31,7 @@ namespace Smart_Sales.ViewModels
 
         public ProductDisplayViewModel(IProductService productService, IInvoiceService invoiceService)
         {
+           
             MyProduct = new Product();
             this.productService = productService;
             this.invoiceService = invoiceService;
@@ -110,6 +111,36 @@ namespace Smart_Sales.ViewModels
                 }
             }
            
+        }
+        
+        public async Task AddProductQuantity()
+        {
+            var value = await Shell.Current.DisplayPromptAsync("ENTER THE QUANTITY TO ADD:", "Enter a positive value of the Quantity without commas","OK","Cancel","Product Quantity To Be Added", 1000, Keyboard.Numeric,"0");
+            int num = 0;
+            try
+            {
+                 num = int.Parse(value);
+            }
+            catch (Exception )
+            {
+                return;
+            }
+
+            
+            if(num > 0) 
+            {
+                MyProduct.AvailableQuantity += num;
+                _ = productService.UpdateProduct(MyProduct).Result;
+                 await Shell.Current.DisplayAlert("ADDED SUCCESFULLY!", "The Product Quantity has been added", "OK");
+
+                return;
+            }
+            else 
+            {
+                await Shell.Current.DisplayAlert("NEGATIVE OR ZERO NUMBER ", "Failed to Add the Product Quantity", "OK");
+                return ;
+            }
+        
         }
 
         public void SortInvoicesonDate(DateTime date)

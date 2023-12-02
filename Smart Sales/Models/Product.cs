@@ -19,6 +19,7 @@ namespace Smart_Sales.Models
         public double JumlaSoldQty { get; set; }
         public double RetailSoldQty { get; set; }
         public double TotalSales { get; set; }
+        public double AvailableQuantity { get; set; }
         public double TotalQuantity { get; set; }
         public string ProductQty { get; set; }
         public DateTime CreatedDate { get; set; }

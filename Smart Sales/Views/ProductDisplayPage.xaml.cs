@@ -25,4 +25,20 @@ public partial class ProductDisplayPage : ContentPage
     {
         viewModel.SortInvoicesonDate(e.NewDate);
     }
+
+    //public async Task Addimg_ClickedAsync()
+    //{
+    //    await viewModel.AddProductQuantity();
+    //    lblAvbleQty.Text = "Available Product/Service Quantity: " + viewModel.MyProduct.AvailableQuantity.ToString();
+    //}
+
+    
+
+    private async void addimg_Clicked_1(object sender, EventArgs e)
+    {
+        await viewModel.AddProductQuantity();
+        lblAvbleQty.Text = "Available Product/Service Quantity: " + viewModel.MyProduct.AvailableQuantity.ToString();
+
+
+    }
 }
