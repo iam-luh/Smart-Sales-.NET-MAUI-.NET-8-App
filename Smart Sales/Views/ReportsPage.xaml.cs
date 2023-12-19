@@ -19,4 +19,8 @@ public partial class ReportsPage : ContentPage
         ViewModel.SortallData(new InvoiceList() { InvoiceDate=DateTime.Now }) ;
     }
 
+    private void Imgbtncalendar_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }

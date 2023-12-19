@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34310.174
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smart Sales", "Smart Sales\Smart Sales.csproj", "{67CABB04-EE94-4FE7-BD39-E1D572393E44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smart Sales", "Smart Sales\Smart Sales.csproj", "{67CABB04-EE94-4FE7-BD39-E1D572393E44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

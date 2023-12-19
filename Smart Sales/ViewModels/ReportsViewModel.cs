@@ -85,6 +85,7 @@ namespace Smart_Sales.ViewModels
         [RelayCommand]
         public void SortallData(InvoiceList date)
         {
+            //Get all the invoices from the database of a particular year
             var invoices = invoiceService.GetAllInvoices().Result.Where(i=>i.LastUpdatedDate.Year == date.InvoiceDate.Year);
             //Get all the invoices from the database and then group the invoices which are income 
             var incomes = invoices.Where(i => i.IsExpense is false );
@@ -102,7 +103,7 @@ namespace Smart_Sales.ViewModels
                 });
             }
             Income.OrderBy(i => i.LastUpdatedDate);
-
+            
             //Get all the invoices from the database and then group the invoices which are expenses
 
             var expenses = invoices.Where(i => i.IsExpense is true);
@@ -127,7 +128,7 @@ namespace Smart_Sales.ViewModels
                 
                 double totalnetincome = 0,income = 0 ,expense = 0;
                 var incomelist = Income.Where(x=>x.LastUpdatedDate.Month == i);
-                var expenselist = Expense.Where(x=>x.LastUpdatedDate.Month==i);
+                var expenselist = Expense.Where(x=>x.LastUpdatedDate.Month == i);
 
                 if(incomelist.Count() == 1) 
                 { 
@@ -148,6 +149,79 @@ namespace Smart_Sales.ViewModels
                     Name = DateTime.Now.AddMonths(i - DateTime.Now.Month).ToString("MMM")
                 });
             }
+
+
+            //This part will only be executed when months are selected
+            var allinvoices = invoiceService.GetAllInvoices().Result.Where(i => (i.LastUpdatedDate.Month == date.InvoiceDate.Month) && (i.LastUpdatedDate.Year == date.InvoiceDate.Year));
+            var Monthdates = new List<DateTime>();
+            var firstdayofMonth = new DateTime(date.InvoiceDate.Year, date.InvoiceDate.Month, 1).Date;
+
+            //This will get the first and last days of the week in the month
+            for (double i = 0; i < 4; i++)
+            {
+                var weekday = firstdayofMonth.AddDays(7 * i);
+                Monthdates.Add(weekday);
+                if (i == 1 || i == 2)
+                {
+                    Monthdates.Add(weekday.AddDays(6).AddHours(23).AddMinutes(59).AddSeconds(59));
+                }
+                if (i == 3)
+                {
+                    for (int j = 3; j > 0; --j)
+                    {
+                        if (weekday.AddDays(6 + j).Month == weekday.Month)
+                        {
+                            Monthdates.Add(weekday.AddDays(6 + j).AddHours(23).AddMinutes(59).AddSeconds(59));
+                            break;
+                        }
+                    }
+                }
+            }
+
+            var allincomes = invoices.Where(i => i.IsExpense is false);
+            //These are the grouped invoices for all the four weeks
+            Income.Clear();
+
+            for(int i=0; i<4; i++)
+            {   var groupallincomes = allincomes.Where(a => a.LastUpdatedDate >= Monthdates[0 * i] && a.LastUpdatedDate <= Monthdates[(0 * i) + 1]);
+                
+                Income.Add(new Invoice()
+                {
+                    Name = Monthdates[0*i].ToString("dd/MM-") + Monthdates[(0 * i) + 1].ToString("dd/MM"),
+                    Cost = groupallincomes.Count() >= 1 ? groupallincomes.Sum(a => a.Cost) : 0,
+                });
+            }
+
+            var allexpenses = invoices.Where(i => i.IsExpense is true);
+            //These are the grouped invoices for all the four weeks
+
+            Expense.Clear();
+            for (int i = 0; i < 4; i++)
+            {
+                var groupallincomes = allexpenses.Where(a => a.LastUpdatedDate >= Monthdates[0 * i] && a.LastUpdatedDate <= Monthdates[(0 * i) + 1]);
+                Expense.Add(new Invoice()
+                {
+                    Name = Monthdates[0 * i].ToString("dd/MM-") + Monthdates[(0 * i) + 1].ToString("dd/MM"),
+                    Cost = groupallincomes.Count() >= 1 ? groupallincomes.Sum(a => a.Cost) : 0,
+                }) ;
+            }
+
+            NetIncome.Clear();
+            for(int i = 0;i < 4;i++)
+            {
+                string netdate= "dd/MM";
+
+                netdate = Income.Count >= i+1 ? Income[i].Name : Expense.Count >= 1 ? Expense[i].Name : netdate;
+
+                NetIncome.Add(new Invoice()
+                {
+                    Name = netdate,
+                    Cost= Income[i].Cost - Expense[i].Cost
+                }) ;
+            }
+
+
+
             // This displays the value for the netincome, income and expenses
             Myincome = Income.Sum(x => x.Cost);
             Myexpense = Expense.Sum(x => x.Cost);
@@ -155,6 +229,7 @@ namespace Smart_Sales.ViewModels
             SortProductData(date);
         }
 
+        //This method is responsible for finding and sorting all information about the products
         [RelayCommand]
         public void SortProductData(InvoiceList list)
         {

@@ -78,6 +78,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\blackaddbtn.svg" />
+	  <None Remove="Resources\Images\calendar.svg" />
 	  <None Remove="Resources\Images\contacticon.svg" />
 	  <None Remove="Resources\Images\smartsaleslogo.png" />
 	  <None Remove="Resources\Images\smartsalesz.png" />
