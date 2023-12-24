@@ -16,11 +16,33 @@ public partial class ReportsPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        ViewModel.SortallData(new InvoiceList() { InvoiceDate=DateTime.Now }) ;
+        //ViewModel.SortallData(new InvoiceList() { InvoiceDate=DateTime.Now });
+        if (ViewModel.Timeperiod.Equals("Years"))
+        {
+            ViewModel.SortallDataCommand.Execute(new InvoiceList() { InvoiceDate = DateTime.Now.AddYears((int)(tabView.SelectedIndex - 11)) });
+        }
+        else
+        {  
+            ViewModel.SortallDataMonthsCommand.Execute(new InvoiceList() { InvoiceDate = DateTime.Now.AddMonths((int)(tabView.SelectedIndex - 11)) });
+        }
+
+
     }
 
-    private void Imgbtncalendar_Clicked(object sender, EventArgs e)
+    private async void Imgbtncalendar_Clicked(object sender, EventArgs e)
     {
+        await ViewModel.SelectTimePeriod();
+        lblcalendar.Text = ViewModel.Timeperiod;
+        if(ViewModel.Timeperiod.Equals("Years"))
+        {
+            ViewModel.CreateDateCollection();
+            ViewModel.SortallDataCommand.Execute(new InvoiceList() { InvoiceDate = DateTime.Now.AddYears((int)(tabView.SelectedIndex - 11))});
+        }
+        else
+        {
+            ViewModel.CreateMonthsDateCollection();
+            ViewModel.SortallDataMonthsCommand.Execute(new InvoiceList() { InvoiceDate = DateTime.Now.AddMonths((int)(tabView.SelectedIndex - 11))});
+        }
 
     }
 }

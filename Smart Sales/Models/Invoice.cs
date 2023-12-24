@@ -18,7 +18,6 @@ namespace Smart_Sales.Models
         public double ProductCost { get; set; }
         public double Quantity { get; set; }
         public string ProductUnit { get; set; }
-        public DateTime CreatedDate { get; set; }
         public string Name { get; set; }
 
         public bool IsPaid { get; set; }
@@ -26,6 +25,9 @@ namespace Smart_Sales.Models
         public bool IsExpense { get; set; }
         public bool CantEdit { get; set; }
         public DateTime LastUpdatedDate { get; set; }
+        public DateTime PaidDate { get; set; }
+        public DateTime CreatedDate { get; set; }
+
         public TimeSpan CreatedTime { get; set; }
 
 

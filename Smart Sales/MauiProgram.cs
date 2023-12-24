@@ -24,6 +24,7 @@ namespace Smart_Sales
             builder.Services.AddSingleton<IProductService, ProductService>();
             builder.Services.AddSingleton<IPasswordService, PasswordService>();
             builder.Services.AddSingleton<IUsernameService, UsernameService>();
+            builder.Services.AddSingleton<IStoreService, StoreService>();
 
 
             builder.Services.AddTransient<HomeViewModel>();

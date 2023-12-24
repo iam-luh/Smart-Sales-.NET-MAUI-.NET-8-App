@@ -46,9 +46,7 @@ namespace Smart_Sales.ViewModels
             return dateCollection;
             
         }
-
-
-      
+          
 
         [RelayCommand]
         public void SortAllInvoices(InvoiceList list )

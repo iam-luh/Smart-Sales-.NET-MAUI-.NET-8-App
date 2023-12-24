@@ -43,6 +43,8 @@ public partial class AddInvoicePage : ContentPage
         }
 
         viewModel.Myinvoice.CantEdit = false;
+        viewModel.Myinvoice.CreatedTime = DateTime.Now.TimeOfDay;
+        timepick.Time = DateTime.Now.TimeOfDay;
     }
 
 

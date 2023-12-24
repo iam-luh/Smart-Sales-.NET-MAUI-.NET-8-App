@@ -10,13 +10,16 @@
              Shell.NavBarIsVisible="False"
              Title="ProductDisplayPage">
     <VerticalStackLayout BackgroundColor="#f5f6f8">
-        <HorizontalStackLayout Spacing="20" Padding="15,20,15,0">
+        <Grid ColumnSpacing="20" HorizontalOptions="Fill" ColumnDefinitions="Auto,Auto,Auto" Padding="15,20,15,0">
             <ImageButton Source="backbtn.svg"  HeightRequest="30" WidthRequest="30" Command="{Binding GoBackCommand}" />
-            <Label VerticalOptions="Center" Margin="10,0,0,0" Text="Product Details" TextColor="Black" FontSize="17" FontAttributes="Bold"/>
-            <ImageButton Source="editbtn.png" Margin="0,0,0,0"  HeightRequest="29" WidthRequest="29" Command="{Binding GoToProductDetailsCommand}" CommandParameter="{Binding MyProduct}"/>
-            <ImageButton x:Name="addimg" Source="blackaddbtn.png" HeightRequest="29" WidthRequest="29" Clicked="addimg_Clicked_1" />
-            <ImageButton Source="sdelete.png"  HeightRequest="29" WidthRequest="29" Command="{Binding DeleteProductCommand}" CommandParameter="{Binding MyProduct}"/>
-        </HorizontalStackLayout>
+            <Label Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0" Text="Product Details" TextColor="Black" FontSize="17" FontAttributes="Bold"/>
+            <Grid Grid.Column="2" ColumnDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10" Grid.ColumnSpan="3" HorizontalOptions="End">
+                <ImageButton Source="editbtn.png" Margin="0,0,0,0"  HeightRequest="29" WidthRequest="29" Command="{Binding GoToProductDetailsCommand}" CommandParameter="{Binding MyProduct}"/>
+                <ImageButton Grid.Column="1" x:Name="addimg" Source="blackaddbtn.png" HeightRequest="29" WidthRequest="29" Clicked="addimg_Clicked_1" />
+                <ImageButton Grid.Column="2" Source="sdelete.png"  HeightRequest="29" WidthRequest="29" Command="{Binding DeleteProductCommand}" CommandParameter="{Binding MyProduct}"/>
+                <ImageButton Grid.Column="3" Source="history.svg" x:Name="historyimg" HeightRequest="29" WidthRequest="29" />
+            </Grid>
+             </Grid>
         
         <Grid BackgroundColor="#f5f6f8" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="5" ColumnDefinitions="Auto,Auto" Padding="10,30,10,0">
             <Label TextColor="Black" FontSize="21" Grid.ColumnSpan="2" HorizontalOptions="Center" FontAttributes="Bold" Text="{Binding MyProduct.Name}"/>

@@ -135,7 +135,8 @@ namespace Smart_Sales.ViewModels
                 Myinvoice.Name = Myproduct.Name;
                 Myinvoice.IsExpense = Myproduct.IsExpense;
                 Myinvoice.ProductUnit = Myproduct.ProductUnit;
-                Myinvoice.LastUpdatedDate = Myinvoice.CreatedDate.Date + DateTime.Today.Add(Myinvoice.CreatedTime).TimeOfDay;
+                Myinvoice.LastUpdatedDate = Myinvoice.CreatedDate.Date + Myinvoice.CreatedTime;
+                Myinvoice.PaidDate = Myinvoice.IsPaid is true ? DateTime.Now : Myinvoice.PaidDate;
 
                 // Changing the product quantity with the previous invoice
                 // Changing the product quantity with the new invoice
@@ -143,7 +144,7 @@ namespace Smart_Sales.ViewModels
                     (invoiceService.GetAllInvoices().Result.FindIndex(i => i.Id == Myinvoice.Id));
                 if ((Myproduct.AvailableQuantity + invoice.Quantity - Myinvoice.Quantity)<0)
                 {
-                    await Shell.Current.DisplayAlert("NOT ENOUGH QUANTITY", $"{Myproduct.AvailableQuantity} REMAINING, UPDATE FAILURE", "OK");
+                    await Shell.Current.DisplayAlert("NOT ENOUGH QUANTITY", $"ONLY {Myproduct.AvailableQuantity}{Myproduct.ProductUnit} REMAINING, UPDATE FAILURE", "OK");
                     return;
                 }
                 Myproduct.AvailableQuantity  += invoice.Quantity - Myinvoice.Quantity;
@@ -208,7 +209,8 @@ namespace Smart_Sales.ViewModels
                     IsNotPaid=Myinvoice.IsNotPaid,
                     CustomerName=Myinvoice.CustomerName,
                     IsPaid=Myinvoice.IsPaid,
-                    
+                    PaidDate=DateTime.Now
+                     
 
                 });
                 if (response > 0)

@@ -97,7 +97,7 @@
                          HeightRequest="37"                
                          Padding="0"
                          Grid.Row="1">
-                        <TimePicker FontAttributes="Bold" TextColor="gray" Time="{Binding Myinvoice.CreatedTime, Mode=TwoWay}"/>
+                        <TimePicker x:Name="timepick" FontAttributes="Bold" TextColor="gray" Time="{Binding Myinvoice.CreatedTime, Mode=TwoWay}"/>
                     </Border>
                 </Grid>
 
