@@ -118,7 +118,7 @@ namespace Smart_Sales.ViewModels
             {
                 SortallData(date);
             }
-            else
+            else if (Timeperiod is "Months")
             {
                 SortallDataMonths(date);
             }
@@ -404,7 +404,7 @@ namespace Smart_Sales.ViewModels
         public async Task SelectTimePeriod()
         {
             var text= await Shell.Current.DisplayActionSheet("Select a Time Period: ", "Cancel", null, "Months", "Years");
-            Timeperiod = text is null ? Timeperiod : text;
+            Timeperiod = text is null || text is "Cancel"  ? Timeperiod : text;
               
         }
 

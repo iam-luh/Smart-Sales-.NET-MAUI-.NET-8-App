@@ -10,14 +10,14 @@
              Shell.NavBarIsVisible="False"
              Title="ProductDisplayPage">
     <VerticalStackLayout BackgroundColor="#f5f6f8">
-        <Grid ColumnSpacing="20" HorizontalOptions="Fill" ColumnDefinitions="Auto,Auto,Auto" Padding="15,20,15,0">
+        <Grid ColumnSpacing="15" HorizontalOptions="Fill" ColumnDefinitions="Auto,Auto,Auto" Padding="15,20,15,0">
             <ImageButton Source="backbtn.svg"  HeightRequest="30" WidthRequest="30" Command="{Binding GoBackCommand}" />
             <Label Grid.Column="1" VerticalOptions="Center" Margin="10,0,0,0" Text="Product Details" TextColor="Black" FontSize="17" FontAttributes="Bold"/>
             <Grid Grid.Column="2" ColumnDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10" Grid.ColumnSpan="3" HorizontalOptions="End">
                 <ImageButton Source="editbtn.png" Margin="0,0,0,0"  HeightRequest="29" WidthRequest="29" Command="{Binding GoToProductDetailsCommand}" CommandParameter="{Binding MyProduct}"/>
                 <ImageButton Grid.Column="1" x:Name="addimg" Source="blackaddbtn.png" HeightRequest="29" WidthRequest="29" Clicked="addimg_Clicked_1" />
                 <ImageButton Grid.Column="2" Source="sdelete.png"  HeightRequest="29" WidthRequest="29" Command="{Binding DeleteProductCommand}" CommandParameter="{Binding MyProduct}"/>
-                <ImageButton Grid.Column="3" Source="history.svg" x:Name="historyimg" HeightRequest="29" WidthRequest="29" />
+                <ImageButton Grid.Column="3" Source="history.svg" x:Name="historyimg" HeightRequest="29" WidthRequest="29" Command="{Binding GoToProductHistoryCommand}" CommandParameter="{Binding MyProduct}"/>
             </Grid>
              </Grid>
         
@@ -79,19 +79,26 @@
         </tabview:SfTabView>
 
         <Grid Padding="15,10">
-            <listview:SfListView x:Name="listView" ItemSize="75" HeightRequest="550" SelectionMode="None"  ItemsSource="{Binding ListInvoices}"  >
+            <listview:SfListView x:Name="listView" ItemSize="115" HeightRequest="550" SelectionMode="None"  ItemsSource="{Binding ListInvoices}"  >
                 <listview:SfListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid RowDefinitions="Auto,Auto,Auto"  x:DataType="models:Invoice" Padding="0,15">
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"  x:DataType="models:Invoice" BackgroundColor="#f5f6f8" Padding="10,15">
                                 <Grid ColumnDefinitions="Auto,Auto,Auto">
                                     <Label Text="{Binding Name}" TextColor="Black" FontAttributes="Bold"/>
                                     <Label Margin="5,0,0,0" Grid.Column="1" Text="{Binding Quantity,StringFormat='x {0}'}" TextColor="Black" FontAttributes="Bold"/>
                                     <Label Grid.Column="2" Text="{Binding ProductUnit}" TextColor="Black" FontAttributes="Bold"/>
                                 </Grid>
                                 <Label HorizontalOptions="End" Text="{Binding Cost}" TextColor="Black" FontAttributes="Bold"/>
-                                <Label Grid.Row="2" Text="{Binding CustomerName,StringFormat='Paid By : {0}'}"  TextColor="Black" FontAttributes="Bold"/>
-                                <Label Grid.Row="1" Text="{Binding LastUpdatedDate, StringFormat='{0:dd MMM yyyy}'}" TextColor="Black" FontAttributes="Bold"/>
+                                <Label Grid.Row="4" Text="{Binding CustomerName,StringFormat='Paid By : {0}'}"  TextColor="Black" FontAttributes="Bold"/>
+                                <Label Text="{Binding LastUpdatedDate,StringFormat='Last Updated Date: {0: dd MMM yyyy}'}" TextColor="Black" FontAttributes="Bold" Grid.Row="2"/>
+                                <Label Text="{Binding CreatedDate,StringFormat='Invoice Created Date: {0: dd MMM yyyy}'}" TextColor="Black" FontAttributes="Bold" Grid.Row="3"/>
+
+                                <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto" ColumnSpacing="5">
+                                    <Label Text="Paid Date:" TextColor="Black" FontAttributes="Bold" />
+                                    <Label Grid.Column="1"  FontAttributes="Bold" IsVisible="{Binding IsNotPaid}" Text="Not Paid" TextColor="Red" />
+                                    <Label Grid.Column="1" FontAttributes="Bold" TextColor="Black" IsVisible="{Binding IsPaid}" Text="{Binding PaidDate, StringFormat='{0:dd MMM yyyy}'}"/>
+                                </Grid>
                                 <Label Grid.Row="1" HorizontalOptions="End" Text="Completed" TextColor="Green" IsVisible="{Binding IsPaid}" FontAttributes="Bold"/>
                                 <Label Grid.Row="1" HorizontalOptions="End" Text="Pending" TextColor="#f2b862" FontAttributes="Bold" IsVisible="{Binding IsNotPaid}" />
                             </Grid>

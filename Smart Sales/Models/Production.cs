@@ -13,7 +13,7 @@ namespace Smart_Sales.Models
         public int Id { get; set; }
         public string ProductName { get; set; }
         public string ProductCategory { get; set; }
-        public  string ProductUnits { get; set; }
+        public  string ProductUnit { get; set; }
         public double ProductQuantity { get; set; }
         public DateTime ProductionDate { get; set; }
 

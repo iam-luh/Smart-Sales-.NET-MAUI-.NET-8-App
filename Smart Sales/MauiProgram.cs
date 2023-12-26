@@ -35,6 +35,7 @@ namespace Smart_Sales
             builder.Services.AddTransient<ProductsDetailsViewModel>();
             builder.Services.AddTransient<ProductDisplayViewModel>();
             builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<ProductHistoryViewModel>();
                     
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<ReportsPage>(); 
@@ -44,6 +45,7 @@ namespace Smart_Sales
             builder.Services.AddTransient<ProductsDetailsPage>();
             builder.Services.AddTransient<ProductDisplayPage>();
             builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<ProductHistoryPage>();
 
 
             

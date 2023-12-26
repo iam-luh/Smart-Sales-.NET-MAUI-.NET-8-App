@@ -103,4 +103,10 @@
 		<PackageReference Include="Syncfusion.Maui.TabView" Version="23.2.4" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="Views\ProductHistoryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

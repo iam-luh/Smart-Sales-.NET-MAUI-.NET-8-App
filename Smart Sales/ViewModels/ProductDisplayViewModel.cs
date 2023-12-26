@@ -28,17 +28,18 @@ namespace Smart_Sales.ViewModels
         public ObservableCollection<InvoiceList> dates { get; set; }
         private readonly IInvoiceService invoiceService;
         private readonly IProductService productService;
+        private readonly IStoreService storeService;
 
-        public ProductDisplayViewModel(IProductService productService, IInvoiceService invoiceService)
+        public ProductDisplayViewModel(IProductService productService, IInvoiceService invoiceService, IStoreService storeService)
         {
-           
+
             MyProduct = new Product();
             this.productService = productService;
             this.invoiceService = invoiceService;
-            dates = CreateDateCollection();            
+            dates = CreateDateCollection();
             ListInvoices = new ObservableCollection<Invoice>();
             SortAllInvoices(new InvoiceList() { InvoiceDate = DateTime.Now });
-
+            this.storeService = storeService;
         }
 
         public ObservableCollection<InvoiceList> CreateDateCollection()
@@ -92,6 +93,14 @@ namespace Smart_Sales.ViewModels
         }
 
         [RelayCommand]
+        public async Task GoToProductHistory(Product product)
+        {
+            var taskdict = new Dictionary<string, object>();
+            taskdict.Add("Product Detail", product);
+            await Shell.Current.GoToAsync(nameof(ProductHistoryPage), true, taskdict);
+        }
+
+        [RelayCommand]
         public async Task DeleteProduct(Product product)
         {
             bool ans = await Shell.Current.DisplayAlert("DELETE PRODUCT", "Would you like to delete this product?", "Yes", "No");
@@ -125,13 +134,16 @@ namespace Smart_Sales.ViewModels
             {
                 return;
             }
-
             
             if(num > 0) 
             {
                 MyProduct.AvailableQuantity += num;
                 _ = productService.UpdateProduct(MyProduct).Result;
-                 await Shell.Current.DisplayAlert("ADDED SUCCESFULLY!", "The Product Quantity has been added", "OK");
+                _ = storeService.AddProduction(new Production() { ProductName=MyProduct.Name, 
+                                                                  ProductionDate=DateTime.Now,
+                                                                  ProductQuantity=num,
+                                                                  ProductUnit=MyProduct.ProductUnit}).Result;
+                 await Shell.Current.DisplayAlert("ADDED SUCCESFULLY!", "The Product Quantity has been added and recorded", "OK");
 
                 return;
             }

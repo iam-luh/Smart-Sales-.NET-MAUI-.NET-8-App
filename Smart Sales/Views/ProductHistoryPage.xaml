@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Smart_Sales.Models"
+             xmlns:viewmodels="clr-namespace:Smart_Sales.ViewModels"
+             xmlns:listview="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             xmlns:tabview="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"     
+             x:DataType="viewmodels:ProductHistoryViewModel"        
+             x:Class="Smart_Sales.Views.ProductHistoryPage"
+             Shell.NavBarIsVisible="False"
+             Title="ProductHistoryPage">
+    <VerticalStackLayout BackgroundColor="#f5f6f7" Padding="0,25">
+        <Label Text="PRODUCTION HISTORY" HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold" FontSize="21"/>
+        
+        <tabview:SfTabView x:Name="tabView"  TabBarBackground="white" IndicatorPlacement="Bottom"   SelectedIndex="11"  IndicatorBackground="#0370DF"  ItemsSource="{Binding dates}" >
+            <tabview:SfTabView.HeaderItemTemplate >
+                <DataTemplate x:DataType="models:InvoiceList">
+                    <Label TextColor="Black"  FontAttributes="Bold" FontSize="16"  Padding="5,10,10,10"  Text="{Binding InvoiceDate, StringFormat='{0:MMM/yyy}'}">
+                        <Label.GestureRecognizers >
+                            <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:ProductHistoryViewModel}},Path=SortAllInvoicesCommand}" CommandParameter="{Binding .}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </DataTemplate>
+            </tabview:SfTabView.HeaderItemTemplate>
+        </tabview:SfTabView>
+
+        <Grid Padding="15,10">
+            <listview:SfListView x:Name="listView" ItemSize="75" HeightRequest="550" SelectionMode="None"  ItemsSource="{Binding ListInvoices}"  >
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid RowDefinitions="Auto,Auto,Auto"  x:DataType="models:Production" Padding="0,15">
+                                <Grid >
+                                    <Label Text="{Binding ProductName}" TextColor="Black" FontAttributes="Bold"/>
+                                </Grid>
+                                <Grid Grid.Row="1" ColumnDefinitions="Auto,Auto">
+                                    <Label  Text="{Binding ProductQuantity,StringFormat='Product Quantity Added: {0}'}" TextColor="Black" FontAttributes="Bold"/>
+                                    <Label Grid.Column="1" Text="{Binding ProductUnit}" TextColor="Black" FontAttributes="Bold"/>
+                                </Grid>
+                                <Label Grid.Row="2" Text="{Binding ProductionDate, StringFormat='{0:dd MMM yyyy}'}" TextColor="Black" FontAttributes="Bold"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

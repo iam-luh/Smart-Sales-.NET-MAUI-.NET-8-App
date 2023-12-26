@@ -15,7 +15,7 @@ namespace Smart_Sales
             Routing.RegisterRoute(nameof(ProductsDetailsPage),typeof(ProductsDetailsPage));
             Routing.RegisterRoute(nameof(ProductDisplayPage),typeof(ProductDisplayPage));
             Routing.RegisterRoute(nameof(LoginPage),typeof(LoginPage));
-            Routing.RegisterRoute(nameof(AppShell),typeof(AppShell));
+            Routing.RegisterRoute(nameof(ProductHistoryPage),typeof(ProductHistoryPage));
         }
     }
 }

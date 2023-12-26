@@ -73,7 +73,7 @@ namespace Smart_Sales.ViewModels
         [RelayCommand]
         public void FilterInvoicesForWeek(DateTime date)
         {
-            DateTime startDate = GetStartDateForWeek(date);
+            DateTime startDate = GetStartDateForWeek(date.Date);
             DateTime endDate = startDate.AddDays(6); // Sunday is 6 days ahead of Monday
             endDate = endDate.AddHours(23).AddMinutes(59).AddSeconds(59);
 
@@ -111,7 +111,7 @@ namespace Smart_Sales.ViewModels
         [Obsolete]
         public void CalculateWeekly()
         {
-            DateTime startDate = GetStartDateForWeek(DateTime.Now);
+            DateTime startDate = GetStartDateForWeek(DateTime.Today);
             DateTime endDate = startDate.AddDays(6);
             var MyInvoices = invoiceService.GetAllInvoices().Result;
 
