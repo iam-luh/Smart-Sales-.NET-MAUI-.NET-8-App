@@ -18,7 +18,7 @@
 
                 <Grid Grid.Row="2" RowDefinitions="Auto,Auto" HorizontalOptions="Center" ColumnDefinitions="Auto,Auto" ColumnSpacing="5">
                    
-                    <ImageButton x:Name="Imgbtncalendar" Grid.Row="1" Source="calendar.svg" HeightRequest="30" WidthRequest="30" Clicked="Imgbtncalendar_Clicked"/>
+                    <ImageButton x:Name="Imgbtncalendar" Grid.Row="1" Source="calendar.png" HeightRequest="30" WidthRequest="30" Clicked="Imgbtncalendar_Clicked"/>
                     <Label x:Name="lblcalendar" VerticalOptions="Center" Grid.Row="1" FontSize="14" Grid.Column="1" TextColor="Black" FontAttributes="Bold" Text="Years"/>
                 </Grid>
                 <tabview:SfTabView Grid.Row="3" x:Name="tabView"  TabBarBackground="white" IndicatorPlacement="Bottom"   SelectedIndex="11"  IndicatorBackground="#0370DF"  ItemsSource="{Binding dates}" >

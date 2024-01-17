@@ -20,8 +20,8 @@ namespace Smart_Sales.ViewModels
         [ObservableProperty]
         public Invoice myinvoice;
 
-        [ObservableProperty]
-        public Product myproduct;
+        [ObservableProperty]            
+        public Product myproduct; 
 
         [ObservableProperty]
         public TimeSpan invoiceTime;
@@ -54,8 +54,8 @@ namespace Smart_Sales.ViewModels
         {
             var productlist = productService.GetAllProducts().Result ;
 
-            Allproducts.Clear();
-
+            Allproducts.Clear();          
+           
 
             foreach (var product in productlist)
             {

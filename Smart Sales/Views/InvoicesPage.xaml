@@ -32,7 +32,7 @@
             </tabview:SfTabView>
 
             <Grid >
-                <listview:SfListView  x:Name="listView" ItemSize="115"  HeightRequest="550" SelectionMode="None" ItemsSource="{Binding ListInvoices}" >
+                <listview:SfListView  x:Name="listView" ItemSize="128"  HeightRequest="550" SelectionMode="None" ItemsSource="{Binding ListInvoices}" >
 
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate  >

@@ -16,7 +16,7 @@
         </Grid>
 
         <Grid RowDefinitions="Auto">
-            <listview:SfListView HeightRequest="510" x:Name="listView" ScrollBarVisibility="Never" ItemsSource="{Binding Products}" ItemSize="170" >
+            <listview:SfListView HeightRequest="510" x:Name="listView" ScrollBarVisibility="Never" ItemsSource="{Binding Products}" ItemSize="185" >
                 <listview:SfListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Product">
                         <ViewCell>

@@ -88,7 +88,7 @@
                         StrokeThickness="0" 
                         HeightRequest="120" 
                         StrokeShape="RoundRectangle 10,10,10,10"
-                        WidthRequest="180">
+                        WidthRequest="195">
                         <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10">
                             <Label Text="GROSS INCOME" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
                             <Label Grid.Row="1" Text="{Binding Grossincome,StringFormat='{0:N0} TZS'}" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
@@ -103,7 +103,7 @@
                         HeightRequest="120" 
                         BackgroundColor="White"
                         StrokeShape="RoundRectangle 10,10,10,10"
-                        WidthRequest="180">
+                        WidthRequest="195">
                         <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10" >
                             <Label Text="TOTAL EXPENSES" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
                             <Label Grid.Row="1" Text="{Binding Totalexpenses,StringFormat='{0:N0} TZS'}" TextColor="Black" FontAttributes="Bold" FontSize="20"/>
@@ -118,7 +118,7 @@
                         StrokeThickness="0" 
                         HeightRequest="120" 
                         StrokeShape="RoundRectangle 10,10,10,10"
-                        WidthRequest="180">
+                        WidthRequest="195">
                         <Grid RowDefinitions="Auto,Auto,Auto" Padding="10,10" RowSpacing="10">
                             <Label Text="NET INCOME" TextColor="Gray" FontAttributes="Bold" FontSize="13"/>
                             <Label Grid.Row="1" Text="{Binding Netincome,StringFormat='{0:N0} TZS'}" TextColor="Black" FontAttributes="Bold" FontSize="20"/>

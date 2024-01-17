@@ -17,14 +17,14 @@
             <Label Text="Add or Update an Invoice" TextColor="Gray" HorizontalOptions="Center" FontSize="21" FontAttributes="Bold"/>
             <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
                 <Label Text="Name of the Customer" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
-                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="65" Padding="5,0" >
                     <Entry VerticalOptions="Center" x:Name="entryname"   Placeholder="Enter the Customer's Name" PlaceholderColor="Gray" TextColor="gray" FontSize="16"  Text="{Binding Myinvoice.CustomerName, Mode=TwoWay}"/>
                 </Border>
             </Grid>
 
             <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
                 <Label Text="Choose the Product" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
-                <Border Grid.Row="1"   StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                <Border Grid.Row="1"   StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="65" Padding="5,0" >
                     <Picker VerticalOptions="Center" Title="Select the Product or Service" TextColor="Gray" FontAttributes="Bold" x:Name="productpicker" 
                          ItemsSource="{Binding Allproducts}" 
                          BackgroundColor="White"                          
@@ -57,21 +57,21 @@
 
             <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
                 <Label Text=" Price of the Product" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
-                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="65" Padding="5,0" >
                     <Entry VerticalOptions="Center" x:Name="lblprdcost" FontSize="16" Placeholder="Price of the Product" PlaceholderColor="Gray" TextChanged="lblprdcost_TextChanged" FontAttributes="Bold"  TextColor="Black" Text="{Binding Myinvoice.ProductCost, Mode=TwoWay}"/>
                 </Border>
             </Grid>
 
             <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
                 <Label Text="Quantity of the Product" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
-                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="65" Padding="5,0" >
                     <Entry VerticalOptions="Center" x:Name="entryQty" FontAttributes="Bold" FontSize="16" TextChanged="entryQty_TextChanged" Keyboard="Numeric" Placeholder="Enter the Quantity of the Product" TextColor="Black" Text="{Binding Myinvoice.Quantity, Mode=TwoWay}"/>
                 </Border>
             </Grid>
 
             <Grid RowSpacing="10" RowDefinitions="Auto,Auto">
                 <Label Text="Total Cost of the Invoice" TextColor="Gray" FontAttributes="Bold"  FontSize="16"/>
-                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="50" Padding="5,0" >
+                <Border Grid.Row="1"  StrokeThickness="0" StrokeShape="RoundRectangle 15,15,15,15" Background="white" HeightRequest="65" Padding="5,0" >
                     <Entry x:Name="lblttlcost" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16" TextColor="Black" Text="{Binding Myinvoice.Cost, Mode=TwoWay}"/>
                 </Border>
             </Grid>
@@ -82,7 +82,7 @@
                     <Border  StrokeThickness="0"
                         StrokeShape="RoundRectangle 15,15,15,15"
                         Background="white"
-                        HeightRequest="37"                
+                        HeightRequest="47"                
                         Padding="0"
                         Grid.Row="1">
                         <DatePicker FontAttributes="Bold"  Date="{Binding Myinvoice.CreatedDate, Mode=TwoWay}" TextColor="Gray" />
@@ -94,7 +94,7 @@
                     <Border  StrokeThickness="0"
                          StrokeShape="RoundRectangle 15,15,15,15"
                          Background="white"
-                         HeightRequest="37"                
+                         HeightRequest="47"                
                          Padding="0"
                          Grid.Row="1">
                         <TimePicker x:Name="timepick" FontAttributes="Bold" TextColor="gray" Time="{Binding Myinvoice.CreatedTime, Mode=TwoWay}"/>

@@ -17,7 +17,7 @@
             StrokeThickness="0"
             StrokeShape="RoundRectangle 15,15,15,15"
             Background="white"
-            HeightRequest="50"        
+            HeightRequest="65"        
             Padding="5,0" >
                     <Entry VerticalOptions="Center" Placeholder="Name of the Product" FontSize="16" TextColor="Black" Text="{Binding Myproduct.Name, Mode=TwoWay}"/>
                 </Border>
@@ -41,7 +41,7 @@
                StrokeThickness="0"
                StrokeShape="RoundRectangle 15,15,15,15"
                Background="white"
-               HeightRequest="50"        
+               HeightRequest="65"        
                Padding="5,0" >
                     <Picker VerticalOptions="Center" FontSize="16" Title="Select the Units of the Product" TextColor="Black" x:Name="unitpicker" 
                  SelectedIndexChanged="unitpicker_SelectedIndexChanged" 
@@ -66,7 +66,7 @@
             StrokeThickness="0"
             StrokeShape="RoundRectangle 15,15,15,15"
             Background="white"
-            HeightRequest="50"        
+            HeightRequest="65"        
             Padding="5,0" >
                     <Entry VerticalOptions="Center" Keyboard="Numeric" Placeholder="WholeSale Price of the Product" FontSize="16" TextColor="Black" Text="{Binding Myproduct.JumlaPrice, Mode=TwoWay}"/>
                 </Border>
@@ -78,7 +78,7 @@
                 StrokeThickness="0"
                 StrokeShape="RoundRectangle 15,15,15,15"
                 Background="white"
-                HeightRequest="50"        
+                HeightRequest="65"        
                 Padding="5,0" >
                     <Entry VerticalOptions="Center" Keyboard="Numeric" FontSize="16" Placeholder="Retail Price of the Product" TextColor="Black" Text="{Binding Myproduct.RetailPrice, Mode=TwoWay}"/>
                 </Border>
